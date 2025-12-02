@@ -152,6 +152,11 @@
     <string name="apm_action">アクション</string>
     <string name="enable_web_debugging">WebView デバッグを有効</string>
     <string name="enable_web_debugging_summary">Web UI のデバッグに使用できます。必要な場合のみ有効にしてください。</string>
+    <string name="settings_apm_install_confirm">インストール前に確認</string>
+    <string name="settings_apm_install_confirm_summary">モジュールをインストールする前に確認ダイアログを表示する</string>
+    <string name="apm_install_confirm_title">モジュールをインストール</string>
+    <string name="apm_install_confirm_content">%s をインストールしますか？</string>
+
     <string name="settings_donot_store_superkey">ローカルにスーパーキーを保存しない</string>
     <string name="settings_donot_store_superkey_summary">マネージャーの起動時に SuperKey を認証します</string>
     <string name="mode_select_page_title">インストール</string>
@@ -164,7 +169,7 @@
     <string name="home_more_menu_feedback_or_suggestion">フィードバック / 提案</string>
     <string name="home_more_menu_about">APatch について</string>
     <string name="home_dialog_uninstall_title">アンインストール</string>
-    <string name="home_dialog_uninstall_ap_only">APatch をアンインストール</string>
+    <string name="home_dialog_uninstall_ap_only">パッチをアンインストール</string>
     <string name="home_dialog_uninstall_all">全てアンインストール</string>
     <string name="kpm_control_dialog_title">KPModule の管理</string>
     <string name="kpm_control_dialog_content">制御パラメータを入力してください：</string>

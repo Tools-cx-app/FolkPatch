@@ -130,6 +130,21 @@ fun APModuleScreen(navigator: DestinationsNavigator) {
             viewModel.fetchModuleList()
         }
     }
+
+    var pendingInstallUri by remember { mutableStateOf<Uri?>(null) }
+    val installConfirmDialog = rememberConfirmDialog(
+        onConfirm = {
+            pendingInstallUri?.let { uri ->
+                navigator.navigate(InstallScreenDestination(uri, MODULE_TYPE.APM))
+                viewModel.markNeedRefresh()
+            }
+            pendingInstallUri = null
+        },
+        onDismiss = {
+            pendingInstallUri = null
+        }
+    )
+
     val webUILauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { viewModel.fetchModuleList() }
@@ -158,9 +173,30 @@ fun APModuleScreen(navigator: DestinationsNavigator) {
 
                 Log.i("ModuleScreen", "select zip result: $uri")
 
-                navigator.navigate(InstallScreenDestination(uri, MODULE_TYPE.APM))
-
-                viewModel.markNeedRefresh()
+                val prefs = APApplication.sharedPreferences
+                if (prefs.getBoolean("apm_install_confirm_enabled", true)) {
+                    pendingInstallUri = uri
+                    val fileName = try {
+                        var name = uri.path ?: "Module"
+                        context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+                            val nameIndex = cursor.getColumnIndex(android.provider.OpenableColumns.DISPLAY_NAME)
+                            if (cursor.moveToFirst() && nameIndex >= 0) {
+                                name = cursor.getString(nameIndex)
+                            }
+                        }
+                        name
+                    } catch (e: Exception) {
+                        "Module"
+                    }
+                    installConfirmDialog.showConfirm(
+                        title = context.getString(R.string.apm_install_confirm_title),
+                        content = context.getString(R.string.apm_install_confirm_content, fileName),
+                        markdown = false
+                    )
+                } else {
+                    navigator.navigate(InstallScreenDestination(uri, MODULE_TYPE.APM))
+                    viewModel.markNeedRefresh()
+                }
             }
 
             FloatingActionButton(

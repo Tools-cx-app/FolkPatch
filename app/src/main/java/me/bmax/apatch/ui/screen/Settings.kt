@@ -325,6 +325,22 @@ fun SettingScreen() {
                     }
                     enableWebDebugging = it
                 }
+
+                // Install Confirm
+                var installConfirm by rememberSaveable {
+                    mutableStateOf(
+                        prefs.getBoolean("apm_install_confirm_enabled", true)
+                    )
+                }
+                SwitchItem(
+                    icon = Icons.Filled.Save, // Reusing Save icon or maybe Help/Info
+                    title = stringResource(id = R.string.settings_apm_install_confirm),
+                    summary = stringResource(id = R.string.settings_apm_install_confirm_summary),
+                    checked = installConfirm
+                ) {
+                    prefs.edit { putBoolean("apm_install_confirm_enabled", it) }
+                    installConfirm = it
+                }
             }
 
             // Hide Learn APatch card
