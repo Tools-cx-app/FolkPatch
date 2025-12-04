@@ -120,6 +120,10 @@
     <string name="su_pkg_excluded_label">除外</string>
     <string name="su_pkg_excluded_setting_title">変更の除外</string>
     <string name="su_pkg_excluded_setting_summary">このオプションを有効にすると、APatch はこのアプリのモジュールによって変更されたすべてのファイルを復元できるようになります。</string>
+    <string name="su_batch_exclude_title">一括除外</string>
+    <string name="su_batch_exclude_content">非rootアプリの注入を一括で除外します。操作を選択してください</string>
+    <string name="su_exclude_btn">除外</string>
+    <string name="su_exclude_reverse_btn">反転</string>
     <string name="su_show_system_apps">システムアプリを表示</string>
     <string name="su_hide_system_apps">システムアプリを非表示</string>
     <string name="su_refresh">更新</string>

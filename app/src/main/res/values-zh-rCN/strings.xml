@@ -136,6 +136,10 @@
     <string name="su_title">超级用户</string>
     <string name="su_selinux_via_hook">通过 hook 绕过</string>
     <string name="su_pkg_excluded_label">排除</string>
+    <string name="su_batch_exclude_title">批量排除</string>
+    <string name="su_batch_exclude_content">为全部非ROOT权限软件排除注入,请选择一个操作</string>
+    <string name="su_exclude_btn">排除</string>
+    <string name="su_exclude_reverse_btn">反排除</string>
     <string name="su_pkg_excluded_setting_title">排除修改</string>
     <string name="su_pkg_excluded_setting_summary">启用此选项将允许 APatch 恢复此应用模块修改的任何文件。</string>
     <string name="su_show_system_apps">显示系统应用</string>

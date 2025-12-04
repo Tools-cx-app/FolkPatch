@@ -30,6 +30,10 @@
 
     <string name="su_exclude_all_title">Exclude All</string>
     <string name="su_exclude_all_confirm">Are you sure you want to exclude all non-root apps?</string>
+    <string name="su_batch_exclude_title">Batch Exclude</string>
+    <string name="su_batch_exclude_content">Exclude injection for all non-ROOT apps, please select an action</string>
+    <string name="su_exclude_btn">Exclude</string>
+    <string name="su_exclude_reverse_btn">Reverse</string>
 
     <string name="home_learn_apatch">Learn APatch</string>
     <string name="home_click_to_learn_apatch">Learn about the features of APatch and how to use</string>

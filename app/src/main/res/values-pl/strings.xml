@@ -142,6 +142,10 @@
     <string name="su_pkg_excluded_label">Wyklucz</string>
     <string name="su_pkg_excluded_setting_title">Wyklucz modyfikacje</string>
     <string name="su_pkg_excluded_setting_summary">Włączenie tej opcji pozwoli APatch przywrócić wszelkie pliki zmodyfikowane przez moduły tej aplikacji.</string>
+    <string name="su_batch_exclude_title">Masowe wykluczanie</string>
+    <string name="su_batch_exclude_content">Wyklucz wstrzykiwanie dla wszystkich aplikacji bez roota, wybierz działanie</string>
+    <string name="su_exclude_btn">Wyklucz</string>
+    <string name="su_exclude_reverse_btn">Odwróć</string>
     <string name="su_show_system_apps">Pokaż aplikacje systemowe</string>
     <string name="su_hide_system_apps">Ukryj aplikacje systemowe</string>
     <string name="su_refresh">Odśwież</string>

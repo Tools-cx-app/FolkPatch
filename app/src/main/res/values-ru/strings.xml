@@ -146,6 +146,10 @@
     <string name="su_pkg_excluded_label">Исключить</string>
     <string name="su_pkg_excluded_setting_title">Исключить изменения</string>
     <string name="su_pkg_excluded_setting_summary">Включение этой опции позволит APatch восстановить любые файлы, измененные модулями этого приложения.</string>
+    <string name="su_batch_exclude_title">Пакетное исключение</string>
+    <string name="su_batch_exclude_content">Исключить инъекцию для всех не-ROOT приложений, выберите действие</string>
+    <string name="su_exclude_btn">Исключить</string>
+    <string name="su_exclude_reverse_btn">Обратить</string>
     <string name="su_show_system_apps">Показать системные приложения</string>
     <string name="su_hide_system_apps">Скрыть системные приложения</string>
     <string name="su_refresh">Обновить</string>

@@ -119,6 +119,29 @@ class SuperUserViewModel : ViewModel() {
         }
     }
 
+    fun reverseExcludeAll() {
+        val modifiedConfigs = mutableListOf<PkgConfig.Config>()
+        val currentApps = apps
+
+        currentApps.forEach { app ->
+            if (app.config.allow == 0) {
+                val newExclude = if (app.config.exclude == 1) 0 else 1
+                app.config.exclude = newExclude
+                if (newExclude == 1) {
+                    app.config.profile.scontext = APApplication.DEFAULT_SCONTEXT
+                }
+                Natives.setUidExclude(app.uid, newExclude)
+                modifiedConfigs.add(app.config)
+            }
+        }
+
+        if (modifiedConfigs.isNotEmpty()) {
+            PkgConfig.batchChangeConfigs(modifiedConfigs)
+            // Force UI update
+            apps = ArrayList(currentApps)
+        }
+    }
+
     private fun stopRootService() {
         val intent = Intent(apApp, RootServices::class.java)
         RootServices.stop(intent)
