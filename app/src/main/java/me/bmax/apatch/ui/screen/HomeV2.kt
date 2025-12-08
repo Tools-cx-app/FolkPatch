@@ -167,31 +167,34 @@ private fun StatusCardBig(
 ) {
     val isWorking = kpState == APApplication.State.KERNELPATCH_INSTALLED
     val isUpdate = kpState == APApplication.State.KERNELPATCH_NEED_UPDATE || kpState == APApplication.State.KERNELPATCH_NEED_REBOOT
-    val isDark = isSystemInDarkTheme()
     
-    // Colors
-    val containerColor = if (BackgroundConfig.isCustomBackgroundEnabled) {
-         MaterialTheme.colorScheme.primary.copy(alpha = BackgroundConfig.customBackgroundOpacity)
+    val prefs = APApplication.sharedPreferences
+    val darkThemeFollowSys = prefs.getBoolean("night_mode_follow_sys", true)
+    val nightModeEnabled = prefs.getBoolean("night_mode_enabled", false)
+    val isDark = if (darkThemeFollowSys) {
+        isSystemInDarkTheme()
     } else {
-        if (isWorking) {
-             MaterialTheme.colorScheme.primary
-        } else if (isUpdate) {
-             MaterialTheme.colorScheme.secondaryContainer
-        } else {
-             // Use secondaryContainer for Unknown/Not Installed (Fixed/Neutral color like original layout)
-             MaterialTheme.colorScheme.secondaryContainer
-        }
+        nightModeEnabled
     }
     
-    val contentColor = if (BackgroundConfig.isCustomBackgroundEnabled) {
-         if (BackgroundConfig.customBackgroundOpacity > 0.5f) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary
+    // Colors
+    val (containerColor, contentColor) = if (BackgroundConfig.isCustomBackgroundEnabled) {
+         val opacity = BackgroundConfig.customBackgroundOpacity
+         val container = MaterialTheme.colorScheme.primary.copy(alpha = opacity)
+         val content = if (opacity <= 0.1f) {
+             if (isDark) Color.White else Color.Black
+         } else {
+             MaterialTheme.colorScheme.onPrimary
+         }
+         container to content
     } else {
         if (isWorking) {
-            MaterialTheme.colorScheme.onPrimary
+             MaterialTheme.colorScheme.primary to MaterialTheme.colorScheme.onPrimary
         } else if (isUpdate) {
-             MaterialTheme.colorScheme.onSecondaryContainer
+             MaterialTheme.colorScheme.secondaryContainer to MaterialTheme.colorScheme.onSecondaryContainer
         } else {
-            MaterialTheme.colorScheme.onSecondaryContainer
+             // Use secondaryContainer for Unknown/Not Installed (Fixed/Neutral color like original layout)
+             MaterialTheme.colorScheme.secondaryContainer to MaterialTheme.colorScheme.onSecondaryContainer
         }
     }
 
