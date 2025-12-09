@@ -45,7 +45,11 @@ object ThemeManager {
         val customColor: String,
         val homeLayoutStyle: String,
         val nightModeEnabled: Boolean,
-        val nightModeFollowSys: Boolean
+        val nightModeFollowSys: Boolean,
+        // Grid Working Card Background
+        val isGridWorkingCardBackgroundEnabled: Boolean = false,
+        val gridWorkingCardBackgroundOpacity: Float = 1.0f,
+        val gridWorkingCardBackgroundDim: Float = 0.3f
     )
 
     data class ThemeMetadata(
@@ -73,7 +77,10 @@ object ThemeManager {
                     customColor = prefs.getString("custom_color", "blue") ?: "blue",
                     homeLayoutStyle = prefs.getString("home_layout_style", "default") ?: "default",
                     nightModeEnabled = prefs.getBoolean("night_mode_enabled", false),
-                    nightModeFollowSys = prefs.getBoolean("night_mode_follow_sys", true)
+                    nightModeFollowSys = prefs.getBoolean("night_mode_follow_sys", true),
+                    isGridWorkingCardBackgroundEnabled = BackgroundConfig.isGridWorkingCardBackgroundEnabled,
+                    gridWorkingCardBackgroundOpacity = BackgroundConfig.gridWorkingCardBackgroundOpacity,
+                    gridWorkingCardBackgroundDim = BackgroundConfig.gridWorkingCardBackgroundDim
                 )
 
                 // 2. Write Config JSON
@@ -86,6 +93,11 @@ object ThemeManager {
                     put("homeLayoutStyle", config.homeLayoutStyle)
                     put("nightModeEnabled", config.nightModeEnabled)
                     put("nightModeFollowSys", config.nightModeFollowSys)
+                    
+                    // Grid Working Card Background
+                    put("isGridWorkingCardBackgroundEnabled", config.isGridWorkingCardBackgroundEnabled)
+                    put("gridWorkingCardBackgroundOpacity", config.gridWorkingCardBackgroundOpacity.toDouble())
+                    put("gridWorkingCardBackgroundDim", config.gridWorkingCardBackgroundDim.toDouble())
 
                     // Add metadata
                     put("meta_name", metadata.name)
@@ -99,9 +111,25 @@ object ThemeManager {
 
                 // 3. Copy Background if enabled
                 if (config.isBackgroundEnabled) {
-                    val bgFile = File(context.filesDir, "background.jpg") // BackgroundManager.BACKGROUND_FILENAME
-                    if (bgFile.exists()) {
-                        bgFile.copyTo(File(cacheDir, BACKGROUND_FILENAME))
+                    val extensions = listOf(".jpg", ".png", ".gif", ".webp")
+                    for (ext in extensions) {
+                        val bgFile = File(context.filesDir, "background$ext")
+                        if (bgFile.exists()) {
+                            bgFile.copyTo(File(cacheDir, "background$ext"))
+                            break // Only one background file should exist
+                        }
+                    }
+                }
+                
+                // Copy Grid Working Card Background if enabled
+                if (config.isGridWorkingCardBackgroundEnabled) {
+                    val extensions = listOf(".jpg", ".png", ".gif", ".webp")
+                    for (ext in extensions) {
+                        val bgFile = File(context.filesDir, "grid_working_card_background$ext")
+                        if (bgFile.exists()) {
+                            bgFile.copyTo(File(cacheDir, "grid_working_card_background$ext"))
+                            break 
+                        }
                     }
                 }
 
@@ -233,6 +261,11 @@ object ThemeManager {
                 val homeLayoutStyle = json.optString("homeLayoutStyle", "default")
                 val nightModeEnabled = json.optBoolean("nightModeEnabled", false)
                 val nightModeFollowSys = json.optBoolean("nightModeFollowSys", true)
+                
+                // Grid Working Card Background
+                val isGridWorkingCardBackgroundEnabled = json.optBoolean("isGridWorkingCardBackgroundEnabled", false)
+                val gridWorkingCardBackgroundOpacity = json.optDouble("gridWorkingCardBackgroundOpacity", 1.0).toFloat()
+                val gridWorkingCardBackgroundDim = json.optDouble("gridWorkingCardBackgroundDim", 0.3).toFloat()
 
                 // 3. Apply Background
                 BackgroundConfig.setCustomBackgroundOpacityValue(backgroundOpacity)
@@ -240,21 +273,65 @@ object ThemeManager {
                 BackgroundConfig.setCustomBackgroundEnabledState(isBackgroundEnabled)
 
                 if (isBackgroundEnabled) {
-                    val bgFile = File(cacheDir, BACKGROUND_FILENAME)
-                    if (bgFile.exists()) {
-                        val destFile = File(context.filesDir, "background.jpg")
-                        bgFile.copyTo(destFile, overwrite = true)
-                        // Update URI to point to local file with timestamp to force refresh
-                         val fileUri = Uri.fromFile(destFile).buildUpon()
-                            .appendQueryParameter("t", System.currentTimeMillis().toString())
-                            .build()
-                         BackgroundConfig.updateCustomBackgroundUri(fileUri.toString())
+                    val extensions = listOf(".jpg", ".png", ".gif", ".webp")
+                    var bgFound = false
+                    for (ext in extensions) {
+                        val bgFile = File(cacheDir, "background$ext")
+                        if (bgFile.exists()) {
+                            // Clear old background files first
+                            for (oldExt in extensions) {
+                                val oldFile = File(context.filesDir, "background$oldExt")
+                                if (oldFile.exists()) oldFile.delete()
+                            }
+                            
+                            val destFile = File(context.filesDir, "background$ext")
+                            bgFile.copyTo(destFile, overwrite = true)
+                            // Update URI to point to local file with timestamp to force refresh
+                             val fileUri = Uri.fromFile(destFile).buildUpon()
+                                .appendQueryParameter("t", System.currentTimeMillis().toString())
+                                .build()
+                             BackgroundConfig.updateCustomBackgroundUri(fileUri.toString())
+                             bgFound = true
+                             break
+                        }
+                    }
+                    if (!bgFound) {
+                        // Fallback logic if needed, or disable background
                     }
                 } else {
                      // Maybe clear if we want to enforce theme state exactly
                      // But user might want to keep files.
                      // The requirement implies importing the theme as is.
                 }
+                
+                // Apply Grid Working Card Background
+                BackgroundConfig.setGridWorkingCardBackgroundOpacityValue(gridWorkingCardBackgroundOpacity)
+                BackgroundConfig.setGridWorkingCardBackgroundDimValue(gridWorkingCardBackgroundDim)
+                BackgroundConfig.setGridWorkingCardBackgroundEnabledState(isGridWorkingCardBackgroundEnabled)
+                
+                if (isGridWorkingCardBackgroundEnabled) {
+                    val extensions = listOf(".jpg", ".png", ".gif", ".webp")
+                    for (ext in extensions) {
+                        val bgFile = File(cacheDir, "grid_working_card_background$ext")
+                        if (bgFile.exists()) {
+                            // Clear old files
+                            for (oldExt in extensions) {
+                                val oldFile = File(context.filesDir, "grid_working_card_background$oldExt")
+                                if (oldFile.exists()) oldFile.delete()
+                            }
+                            
+                            val destFile = File(context.filesDir, "grid_working_card_background$ext")
+                            bgFile.copyTo(destFile, overwrite = true)
+                            // Update URI
+                             val fileUri = Uri.fromFile(destFile).buildUpon()
+                                .appendQueryParameter("t", System.currentTimeMillis().toString())
+                                .build()
+                             BackgroundConfig.updateGridWorkingCardBackgroundUri(fileUri.toString())
+                             break
+                        }
+                    }
+                }
+                
                 BackgroundConfig.save(context)
 
                 // 4. Apply Font
