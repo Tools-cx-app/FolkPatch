@@ -338,7 +338,7 @@ private fun BottomBar(navController: NavHostController) {
         NavigationBar(
             tonalElevation = if (BackgroundConfig.isCustomBackgroundEnabled) 0.dp else 8.dp,
             containerColor = if (BackgroundConfig.isCustomBackgroundEnabled) {
-                MaterialTheme.colorScheme.surface
+                MaterialTheme.colorScheme.surface.copy(alpha = BackgroundConfig.customBackgroundOpacity)
             } else {
                 NavigationBarDefaults.containerColor
             }

@@ -294,7 +294,7 @@
 
     <string name="settings_app_dpi">App DPI</string>
     <string name="settings_lite_mode">Lite Mode</string>
-    <string name="settings_lite_mode_mode_summary">Enable lite mode for better performance</string>
+    <string name="settings_lite_mode_mode_summary">Do not mount files for better performance and stealth</string>
     <string name="settings_force_overlayfs_mode">Force OverlayFS Mode</string>
     <string name="settings_force_overlayfs_mode_summary">Force use OverlayFS for modules</string>
     <string name="settings_app_title">App Title</string>
@@ -302,6 +302,14 @@
     <string name="settings_custom_background_enabled">Custom Background Enabled</string>
     <string name="settings_custom_background_opacity">Card opacity</string>
     <string name="settings_custom_background_dim">Background dim</string>
+    <string name="settings_multi_background_mode">Multi-Background Mode</string>
+    <string name="settings_multi_background_mode_summary">Set different background images for different pages</string>
+    <string name="settings_select_home_background">Home Page Background</string>
+    <string name="settings_select_kernel_background">Kernel Module Background</string>
+    <string name="settings_select_superuser_background">Superuser Background</string>
+    <string name="settings_select_system_module_background">System Module Background</string>
+    <string name="settings_select_settings_background">Settings Background</string>
+
     
     <!-- Font Settings -->
     <string name="settings_custom_font">Custom Font</string>
@@ -323,6 +331,7 @@
     <string name="settings_background_image_cleared">Background image cleared</string>
     <string name="settings_clear_background">Clear Background</string>
     <string name="settings_clear_background_confirm">Are you sure you want to clear the background image?</string>
+
     <string name="settings_launcher_icon">Launcher Icon</string>
     <string name="launcher_icon_default">FolkPatch</string>
     <string name="launcher_icon_classic">FolkPatch Anime</string>
@@ -476,4 +485,9 @@
     <string name="update_close">Close</string>
     <string name="update_latest">You are on the latest version</string>
     <string name="update_error">Error checking for updates</string>
+    <string name="settings_category_general">General</string>
+    <string name="settings_category_appearance">Appearance</string>
+    <string name="settings_category_behavior">Behavior</string>
+    <string name="settings_category_module">Modules</string>
+    <string name="settings_category_security">Security</string>
 </resources>

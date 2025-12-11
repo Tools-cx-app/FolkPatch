@@ -287,7 +287,7 @@
 
     <string name="settings_app_dpi">魔法使清晰度</string>
     <string name="settings_lite_mode">简约魔法模式</string>
-    <string name="settings_lite_mode_mode_summary">启用简约魔法模式以获得更好的施法体验</string>
+    <string name="settings_lite_mode_mode_summary">不挂载魔法文件以获得更好的施法性能和隐蔽性</string>
     <string name="settings_force_overlayfs_mode">强制星之回廊模式</string>
     <string name="settings_force_overlayfs_mode_summary">强制使用星之回廊加载魔法阵</string>
     <string name="settings_app_title">魔法使名称</string>
@@ -303,6 +303,13 @@
     <string name="settings_background_image_cleared">魔法背景已清除</string>
     <string name="settings_clear_background">清除魔法背景</string>
     <string name="settings_clear_background_confirm">确定要清除魔法背景图片吗？</string>
+    <string name="settings_multi_background_mode">次元多魔法</string>
+    <string name="settings_multi_background_mode_summary">为不同页面设置不同的魔法背景图片</string>
+    <string name="settings_select_home_background">首页魔法背景</string>
+    <string name="settings_select_kernel_background">内核模块魔法背景</string>
+    <string name="settings_select_superuser_background">超级用户魔法背景</string>
+    <string name="settings_select_system_module_background">系统模块魔法背景</string>
+    <string name="settings_select_settings_background">设置页面魔法背景</string>
     <string name="settings_launcher_icon">魔法使徽章</string>
     <string name="launcher_icon_default">FolkPatch</string>
     <string name="launcher_icon_classic">FolkPatch Anime</string>
@@ -471,4 +478,10 @@
     <string name="update_close">关闭</string>
     <string name="update_latest">您已掌握最新的魔法</string>
     <string name="update_error">检查魔法升级时出错</string>
+    <!--折叠选项-->
+    <string name="settings_category_general">常规</string>
+    <string name="settings_category_appearance">外观</string>
+    <string name="settings_category_behavior">行为</string>
+    <string name="settings_category_module">模块</string>
+    <string name="settings_category_security">安全</string>
 </resources>

@@ -286,7 +286,7 @@
 
     <string name="settings_app_dpi">DPI Aplikasi</string>
     <string name="settings_lite_mode">Mode Ringan</string>
-    <string name="settings_lite_mode_mode_summary">Aktifkan mode ringan untuk kinerja yang lebih baik</string>
+    <string name="settings_lite_mode_mode_summary">Jangan mount file untuk performa dan penyembunyian yang lebih baik</string>
     <string name="settings_force_overlayfs_mode">Mode OverlayFS Paksa</string>
     <string name="settings_force_overlayfs_mode_summary">Paksa penggunaan OverlayFS untuk modul</string>
     <string name="settings_app_title">Judul Aplikasi</string>
@@ -302,6 +302,13 @@
     <string name="settings_background_image_cleared">Gambar latar belakang dihapus</string>
     <string name="settings_clear_background">Hapus latar belakang</string>
     <string name="settings_clear_background_confirm">Apakah Anda yakin ingin menghapus gambar latar belakang?</string>
+    <string name="settings_multi_background_mode">Mode Multi-Latar Belakang</string>
+    <string name="settings_multi_background_mode_summary">Atur gambar latar belakang yang berbeda untuk halaman yang berbeda</string>
+    <string name="settings_select_home_background">Latar Belakang Halaman Utama</string>
+    <string name="settings_select_kernel_background">Latar Belakang Modul Kernel</string>
+    <string name="settings_select_superuser_background">Latar Belakang Superuser</string>
+    <string name="settings_select_system_module_background">Latar Belakang Modul Sistem</string>
+    <string name="settings_select_settings_background">Latar Belakang Halaman Pengaturan</string>
     <string name="settings_launcher_icon">Ikon Peluncur</string>
     <string name="launcher_icon_default">FolkPatch</string>
     <string name="launcher_icon_classic">FolkPatch Anime</string>
@@ -455,4 +462,10 @@
     <string name="update_close">Tutup</string>
     <string name="update_latest">Anda sudah menggunakan versi terbaru</string>
     <string name="update_error">Kesalahan saat memeriksa pembaruan</string>
+    <!--Opsi Lipat-->
+    <string name="settings_category_general">Umum</string>
+    <string name="settings_category_appearance">Tampilan</string>
+    <string name="settings_category_behavior">Perilaku</string>
+    <string name="settings_category_module">Modul</string>
+    <string name="settings_category_security">Keamanan</string>
 </resources>

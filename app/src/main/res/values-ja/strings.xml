@@ -253,7 +253,7 @@
 
     <string name="settings_app_dpi">アプリの DPI</string>
     <string name="settings_lite_mode">ライトモード</string>
-    <string name="settings_lite_mode_mode_summary">パフォーマンス向上のためライトモードを有効にする</string>
+    <string name="settings_lite_mode_mode_summary">より良いパフォーマンスと隠匿性のためにファイルをマウントしない</string>
     <string name="settings_force_overlayfs_mode">強制OverlayFSモード</string>
     <string name="settings_force_overlayfs_mode_summary">モジュール機能にOverlayFSを強制的に使用する</string>
     <string name="settings_app_title">アプリタイトル</string>
@@ -269,6 +269,13 @@
     <string name="settings_background_image_cleared">背景画像がクリアされました</string>
     <string name="settings_clear_background">背景をクリア</string>
     <string name="settings_clear_background_confirm">背景画像をクリアしてもよろしいですか？</string>
+    <string name="settings_multi_background_mode">複数背景モード</string>
+    <string name="settings_multi_background_mode_summary">異なるページに異なる背景画像を設定する</string>
+    <string name="settings_select_home_background">ホームページ背景</string>
+    <string name="settings_select_kernel_background">カーネルモジュール背景</string>
+    <string name="settings_select_superuser_background">スーパーユーザー背景</string>
+    <string name="settings_select_system_module_background">システムモジュール背景</string>
+    <string name="settings_select_settings_background">設定ページ背景</string>
     <string name="launcher_icon_default">FolkPatch</string>
     <string name="launcher_icon_classic">FolkPatch Anime</string>
     <string name="launcher_icon_apatch">APatch</string>
@@ -432,4 +439,10 @@
     <string name="update_close">閉じる</string>
     <string name="update_latest">最新バージョンです</string>
     <string name="update_error">更新の確認でエラーが発生しました</string>
+    <!--折りたたみオプション-->
+    <string name="settings_category_general">一般</string>
+    <string name="settings_category_appearance">外観</string>
+    <string name="settings_category_behavior">動作</string>
+    <string name="settings_category_module">モジュール</string>
+    <string name="settings_category_security">セキュリティ</string>
 </resources>

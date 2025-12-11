@@ -284,7 +284,7 @@
 
     <string name="settings_app_dpi">仙器DPI</string>
     <string name="settings_lite_mode">清修之境</string>
-    <string name="settings_lite_mode_mode_summary">启清修之境，以臻渡劫优效</string>
+    <string name="settings_lite_mode_mode_summary">不挂载仙法符箓以获得更好的施法性能和隐藏性</string>
     <string name="settings_force_overlayfs_mode">强启OverlayFS仙域</string>
     <string name="settings_force_overlayfs_mode_summary">强以OverlayFS仙域引仙符入道</string>
     <string name="settings_app_title">仙器名讳</string>
@@ -300,6 +300,13 @@
     <string name="settings_background_image_cleared">仙府背景图已涤</string>
     <string name="settings_clear_background">涤仙府背景</string>
     <string name="settings_clear_background_confirm">确欲涤仙府背景图乎？</string>
+    <string name="settings_multi_background_mode">多背景模式</string>
+    <string name="settings_multi_background_mode_summary">为不同页面设置不同的仙府背景图片</string>
+    <string name="settings_select_home_background">首页仙府背景</string>
+    <string name="settings_select_kernel_background">内核模块仙府背景</string>
+    <string name="settings_select_superuser_background">超级用户仙府背景</string>
+    <string name="settings_select_system_module_background">系统模块仙府背景</string>
+    <string name="settings_select_settings_background">设置页面仙府背景</string>
     <string name="settings_launcher_icon">引仙台标识</string>
     <string name="launcher_icon_default">FolkPatch</string>
     <string name="launcher_icon_classic">FolkPatch Anime</string>
@@ -468,4 +475,10 @@
     <string name="update_close">关闭</string>
     <string name="update_latest">道友已掌握最新仙法</string>
     <string name="update_error">检查仙法更新时出错</string>
+    <!--折叠选项-->
+    <string name="settings_category_general">常规</string>
+    <string name="settings_category_appearance">外观</string>
+    <string name="settings_category_behavior">行为</string>
+    <string name="settings_category_module">模块</string>
+    <string name="settings_category_security">安全</string>
 </resources>

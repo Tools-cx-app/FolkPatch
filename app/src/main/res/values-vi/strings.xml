@@ -287,7 +287,7 @@
 
     <string name="settings_app_dpi">DPI ứng dụng</string>
     <string name="settings_lite_mode">Chế độ gọn nhẹ</string>
-    <string name="settings_lite_mode_mode_summary">Bật chế độ gọn nhẹ để có hiệu suất tốt hơn</string>
+    <string name="settings_lite_mode_mode_summary">Không gắn kết tệp để có hiệu suất và khả năng ẩn tốt hơn</string>
     <string name="settings_force_overlayfs_mode">Buộc chế độ OverlayFS</string>
     <string name="settings_force_overlayfs_mode_summary">Buộc sử dụng OverlayFS để tải module</string>
     <string name="settings_app_title">Tên ứng dụng</string>
@@ -316,6 +316,13 @@
     <string name="settings_background_image_cleared">Hình ảnh nền đã được xóa</string>
     <string name="settings_clear_background">Xóa nền</string>
     <string name="settings_clear_background_confirm">Bạn có chắc chắn muốn xóa hình ảnh nền không?</string>
+    <string name="settings_multi_background_mode">Chế độ đa nền</string>
+    <string name="settings_multi_background_mode_summary">Thiết lập hình ảnh nền khác nhau cho các trang khác nhau</string>
+    <string name="settings_select_home_background">Nền trang chủ</string>
+    <string name="settings_select_kernel_background">Nền mô-đun kernel</string>
+    <string name="settings_select_superuser_background">Nền siêu người dùng</string>
+    <string name="settings_select_system_module_background">Nền mô-đun hệ thống</string>
+    <string name="settings_select_settings_background">Nền trang cài đặt</string>
     <string name="settings_launcher_icon">Biểu tượng màn hình chính</string>
     <string name="launcher_icon_default">FolkPatch</string>
     <string name="launcher_icon_classic">FolkPatch Anime</string>
@@ -472,4 +479,10 @@
     <string name="update_close">Đóng</string>
     <string name="update_latest">Bạn đang sử dụng phiên bản mới nhất</string>
     <string name="update_error">Lỗi kiểm tra cập nhật</string>
+    <!--Tùy chọn thu gọn-->
+    <string name="settings_category_general">Chung</string>
+    <string name="settings_category_appearance">Giao diện</string>
+    <string name="settings_category_behavior">Hành vi</string>
+    <string name="settings_category_module">Mô-đun</string>
+    <string name="settings_category_security">Bảo mật</string>
 </resources>
