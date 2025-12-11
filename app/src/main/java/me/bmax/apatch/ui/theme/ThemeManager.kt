@@ -49,7 +49,9 @@ object ThemeManager {
         // Grid Working Card Background
         val isGridWorkingCardBackgroundEnabled: Boolean = false,
         val gridWorkingCardBackgroundOpacity: Float = 1.0f,
-        val gridWorkingCardBackgroundDim: Float = 0.3f
+        val gridWorkingCardBackgroundDim: Float = 0.3f,
+        // Multi-Background Mode
+        val isMultiBackgroundEnabled: Boolean = false
     )
 
     data class ThemeMetadata(
@@ -80,7 +82,8 @@ object ThemeManager {
                     nightModeFollowSys = prefs.getBoolean("night_mode_follow_sys", true),
                     isGridWorkingCardBackgroundEnabled = BackgroundConfig.isGridWorkingCardBackgroundEnabled,
                     gridWorkingCardBackgroundOpacity = BackgroundConfig.gridWorkingCardBackgroundOpacity,
-                    gridWorkingCardBackgroundDim = BackgroundConfig.gridWorkingCardBackgroundDim
+                    gridWorkingCardBackgroundDim = BackgroundConfig.gridWorkingCardBackgroundDim,
+                    isMultiBackgroundEnabled = BackgroundConfig.isMultiBackgroundEnabled
                 )
 
                 // 2. Write Config JSON
@@ -98,6 +101,9 @@ object ThemeManager {
                     put("isGridWorkingCardBackgroundEnabled", config.isGridWorkingCardBackgroundEnabled)
                     put("gridWorkingCardBackgroundOpacity", config.gridWorkingCardBackgroundOpacity.toDouble())
                     put("gridWorkingCardBackgroundDim", config.gridWorkingCardBackgroundDim.toDouble())
+
+                    // Multi-Background Mode
+                    put("isMultiBackgroundEnabled", config.isMultiBackgroundEnabled)
 
                     // Add metadata
                     put("meta_name", metadata.name)
@@ -129,6 +135,28 @@ object ThemeManager {
                         if (bgFile.exists()) {
                             bgFile.copyTo(File(cacheDir, "grid_working_card_background$ext"))
                             break 
+                        }
+                    }
+                }
+
+                // Copy Multi-Backgrounds if enabled
+                if (config.isMultiBackgroundEnabled) {
+                    val multiBackgrounds = listOf(
+                        "background_home",
+                        "background_kernel",
+                        "background_superuser",
+                        "background_system_module",
+                        "background_settings"
+                    )
+                    val extensions = listOf(".jpg", ".png", ".gif", ".webp")
+                    
+                    for (bgName in multiBackgrounds) {
+                        for (ext in extensions) {
+                            val bgFile = File(context.filesDir, "$bgName$ext")
+                            if (bgFile.exists()) {
+                                bgFile.copyTo(File(cacheDir, "$bgName$ext"))
+                                break
+                            }
                         }
                     }
                 }
@@ -267,6 +295,9 @@ object ThemeManager {
                 val gridWorkingCardBackgroundOpacity = json.optDouble("gridWorkingCardBackgroundOpacity", 1.0).toFloat()
                 val gridWorkingCardBackgroundDim = json.optDouble("gridWorkingCardBackgroundDim", 0.3).toFloat()
 
+                // Multi-Background Mode
+                val isMultiBackgroundEnabled = json.optBoolean("isMultiBackgroundEnabled", false)
+
                 // 3. Apply Background
                 BackgroundConfig.setCustomBackgroundOpacityValue(backgroundOpacity)
                 BackgroundConfig.setCustomBackgroundDimValue(backgroundDim)
@@ -332,6 +363,58 @@ object ThemeManager {
                     }
                 }
                 
+                // Apply Multi-Background Mode
+                BackgroundConfig.setMultiBackgroundEnabledState(isMultiBackgroundEnabled)
+                
+                if (isMultiBackgroundEnabled) {
+                    val multiBackgrounds = listOf(
+                        "background_home" to { uri: String? -> BackgroundConfig.updateHomeBackgroundUri(uri) },
+                        "background_kernel" to { uri: String? -> BackgroundConfig.updateKernelBackgroundUri(uri) },
+                        "background_superuser" to { uri: String? -> BackgroundConfig.updateSuperuserBackgroundUri(uri) },
+                        "background_system_module" to { uri: String? -> BackgroundConfig.updateSystemModuleBackgroundUri(uri) },
+                        "background_settings" to { uri: String? -> BackgroundConfig.updateSettingsBackgroundUri(uri) }
+                    )
+                    val extensions = listOf(".jpg", ".png", ".gif", ".webp")
+
+                    for ((bgName, updateAction) in multiBackgrounds) {
+                        var bgFound = false
+                        for (ext in extensions) {
+                            val bgFile = File(cacheDir, "$bgName$ext")
+                            if (bgFile.exists()) {
+                                // Clear old files
+                                for (oldExt in extensions) {
+                                    val oldFile = File(context.filesDir, "$bgName$oldExt")
+                                    if (oldFile.exists()) oldFile.delete()
+                                }
+                                
+                                val destFile = File(context.filesDir, "$bgName$ext")
+                                bgFile.copyTo(destFile, overwrite = true)
+                                
+                                val fileUri = Uri.fromFile(destFile).buildUpon()
+                                    .appendQueryParameter("t", System.currentTimeMillis().toString())
+                                    .build()
+                                updateAction(fileUri.toString())
+                                bgFound = true
+                                break
+                            }
+                        }
+                        
+                        if (!bgFound) {
+                             // Clear existing if not found in theme
+                             for (oldExt in extensions) {
+                                val oldFile = File(context.filesDir, "$bgName$oldExt")
+                                if (oldFile.exists()) oldFile.delete()
+                            }
+                            updateAction(null)
+                        }
+                    }
+                } else {
+                    // If multi-background is disabled in the theme, disable it here.
+                    // We might also want to clear the files or at least reset the URIs in config?
+                    // BackgroundConfig.setMultiBackgroundEnabledState(false) is already called above.
+                    // We don't necessarily delete the files, just like other background settings don't strictly delete files when disabled.
+                }
+
                 BackgroundConfig.save(context)
 
                 // 4. Apply Font
