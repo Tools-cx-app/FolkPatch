@@ -52,7 +52,12 @@ object ThemeManager {
         val gridWorkingCardBackgroundOpacity: Float = 1.0f,
         val gridWorkingCardBackgroundDim: Float = 0.3f,
         // Multi-Background Mode
-        val isMultiBackgroundEnabled: Boolean = false
+        val isMultiBackgroundEnabled: Boolean = false,
+        // Music Config
+        val isMusicEnabled: Boolean = false,
+        val musicVolume: Float = 1.0f,
+        val isAutoPlayEnabled: Boolean = false,
+        val musicFilename: String? = null
     )
 
     data class ThemeMetadata(
@@ -85,7 +90,11 @@ object ThemeManager {
                     isGridWorkingCardBackgroundEnabled = BackgroundConfig.isGridWorkingCardBackgroundEnabled,
                     gridWorkingCardBackgroundOpacity = BackgroundConfig.gridWorkingCardBackgroundOpacity,
                     gridWorkingCardBackgroundDim = BackgroundConfig.gridWorkingCardBackgroundDim,
-                    isMultiBackgroundEnabled = BackgroundConfig.isMultiBackgroundEnabled
+                    isMultiBackgroundEnabled = BackgroundConfig.isMultiBackgroundEnabled,
+                    isMusicEnabled = MusicConfig.isMusicEnabled,
+                    musicVolume = MusicConfig.volume,
+                    isAutoPlayEnabled = MusicConfig.isAutoPlayEnabled,
+                    musicFilename = MusicConfig.musicFilename
                 )
 
                 // 2. Write Config JSON
@@ -107,6 +116,12 @@ object ThemeManager {
 
                     // Multi-Background Mode
                     put("isMultiBackgroundEnabled", config.isMultiBackgroundEnabled)
+
+                    // Music Config
+                    put("isMusicEnabled", config.isMusicEnabled)
+                    put("musicVolume", config.musicVolume.toDouble())
+                    put("isAutoPlayEnabled", config.isAutoPlayEnabled)
+                    put("musicFilename", config.musicFilename)
 
                     // Add metadata
                     put("meta_name", metadata.name)
@@ -175,7 +190,18 @@ object ThemeManager {
                     }
                 }
 
-                // 5. Encrypt and Zip to Uri
+                // 5. Copy Music if enabled
+                if (config.isMusicEnabled) {
+                    val musicName = config.musicFilename
+                    if (musicName != null) {
+                        val musicFile = MusicConfig.getMusicFile(context)
+                        if (musicFile != null && musicFile.exists()) {
+                            musicFile.copyTo(File(cacheDir, musicName))
+                        }
+                    }
+                }
+
+                // 6. Encrypt and Zip to Uri
                 context.contentResolver.openOutputStream(uri)?.use { os ->
                     // Init Cipher
                     val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
@@ -302,6 +328,12 @@ object ThemeManager {
                 // Multi-Background Mode
                 val isMultiBackgroundEnabled = json.optBoolean("isMultiBackgroundEnabled", false)
 
+                // Music Config
+                val isMusicEnabled = json.optBoolean("isMusicEnabled", false)
+                val musicVolume = json.optDouble("musicVolume", 1.0).toFloat()
+                val isAutoPlayEnabled = json.optBoolean("isAutoPlayEnabled", false)
+                val musicFilename = json.optString("musicFilename", null)
+
                 // 3. Apply Background
                 BackgroundConfig.setCustomBackgroundOpacityValue(backgroundOpacity)
                 BackgroundConfig.setCustomBackgroundDimValue(backgroundDim)
@@ -420,6 +452,25 @@ object ThemeManager {
                 }
 
                 BackgroundConfig.save(context)
+
+                // Apply Music Config
+                // First clear existing music to remove old file
+                MusicConfig.clearMusic(context)
+                
+                // Set new configuration
+                MusicConfig.setMusicEnabledState(isMusicEnabled)
+                MusicConfig.setVolumeValue(musicVolume)
+                MusicConfig.setAutoPlayEnabledState(isAutoPlayEnabled)
+
+                if (isMusicEnabled && musicFilename != null && musicFilename != "null") {
+                    val musicFile = File(cacheDir, musicFilename)
+                    if (musicFile.exists()) {
+                         val destFile = File(MusicConfig.getMusicDir(context), musicFilename)
+                         musicFile.copyTo(destFile, overwrite = true)
+                         MusicConfig.setMusicFilenameValue(musicFilename)
+                    }
+                }
+                MusicConfig.save(context)
 
                 // 4. Apply Font
                 if (isFontEnabled) {

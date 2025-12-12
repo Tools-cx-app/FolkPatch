@@ -409,9 +409,7 @@
     <string name="auto_backup_success">Automatyczna kopia zapasowa zakończona sukcesem: %s</string>
 
     <!-- Auto-added missing strings -->
-    <string name="settings_simple_kernel_version_mode_summary">Ukryj informacje o wersji na karcie roboczej, gdy włączone</string>
     <string name="app_name" translatable="false">FolkPatch</string>
-    <string name="settings_simple_kernel_version_mode">Zwięzły tryb wersji jądra</string>
 
     <!-- Home Layout Strings -->
     <string name="settings_home_layout_style">Styl strony głównej</string>
@@ -487,4 +485,22 @@
     <string name="settings_category_behavior">Zachowanie</string>
     <string name="settings_category_module">Moduły</string>
     <string name="settings_category_security">Bezpieczeństwo</string>
+    
+    <!-- Background Music Strings -->
+    <string name="settings_background_music">Muzyka w tle</string>
+    <string name="settings_background_music_summary">Odtwarzaj muzykę w tle, gdy aplikacja jest na pierwszym planie</string>
+    <string name="settings_background_music_playing">Odtwarzanie: %s</string>
+    <string name="settings_background_music_enabled">Muzyka w tle włączona</string>
+    <string name="settings_select_music_file">Wybierz plik muzyczny</string>
+    <string name="settings_music_selected">Muzyka wybrana</string>
+    <string name="settings_clear_music">Wyczyść muzykę</string>
+    <string name="settings_clear_music_confirm">Czy na pewno chcesz wyczyścić muzykę w tle?</string>
+    <string name="settings_music_auto_play">Automatyczne odtwarzanie</string>
+    <string name="settings_music_auto_play_summary">Automatycznie odtwarzaj muzykę po otwarciu aplikacji</string>
+    <string name="settings_music_volume">Głośność</string>
+    <string name="settings_music_saved">Plik muzyczny zapisany</string>
+    <string name="settings_music_save_error">Nie udało się zapisać pliku muzycznego</string>
+    <string name="settings_music_cleared">Muzyka wyczyszczona</string>
+    <string name="settings_category_multimedia">Multimedia</string>
+    <string name="settings_music_playback_control">Sterowanie odtwarzaniem</string>
 </resources>

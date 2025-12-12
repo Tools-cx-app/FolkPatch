@@ -365,11 +365,9 @@
 
     <!-- Auto-added missing strings -->
     <string name="home_hide_kpatch_version_summary">情報カードでカーネルパッチのバージョンを隠す</string>
-    <string name="settings_simple_kernel_version_mode_summary">有効にすると、動作カードのバージョン情報を隠します</string>
     <string name="home_hide_su_path_summary">情報カードで su のパスを隠す</string>
     <string name="home_hide_fingerprint_summary">情報カードで指紋情報を隠す</string>
     <string name="settings_launcher_icon">ランチャーアイコン</string>
-    <string name="settings_simple_kernel_version_mode">簡潔なカーネルバージョンモード</string>
     <string name="home_hide_fingerprint">指紋情報を隠す</string>
     <string name="home_hide_kpatch_version">カーネルパッチのバージョンを隠す</string>
     <string name="home_hide_su_path">su のパスを隠す</string>
@@ -446,4 +444,22 @@
     <string name="settings_category_behavior">動作</string>
     <string name="settings_category_module">モジュール</string>
     <string name="settings_category_security">セキュリティ</string>
+    
+    <!-- 背景音楽の文字列 -->
+    <string name="settings_background_music">背景音楽</string>
+    <string name="settings_background_music_summary">アプリがフォアグラウンドの時に背景音楽を再生</string>
+    <string name="settings_background_music_playing">再生中: %s</string>
+    <string name="settings_background_music_enabled">背景音楽有効</string>
+    <string name="settings_select_music_file">音楽ファイルを選択</string>
+    <string name="settings_music_selected">音楽が選択されました</string>
+    <string name="settings_clear_music">音楽をクリア</string>
+    <string name="settings_clear_music_confirm">背景音楽をクリアしてもよろしいですか？</string>
+    <string name="settings_music_auto_play">自動再生</string>
+    <string name="settings_music_auto_play_summary">アプリを開いたときに自動的に音楽を再生</string>
+    <string name="settings_music_volume">音量</string>
+    <string name="settings_music_saved">音楽ファイルが保存されました</string>
+    <string name="settings_music_save_error">音楽ファイルの保存に失敗しました</string>
+    <string name="settings_music_cleared">音楽がクリアされました</string>
+    <string name="settings_category_multimedia">マルチメディア</string>
+    <string name="settings_music_playback_control">再生コントロール</string>
 </resources>

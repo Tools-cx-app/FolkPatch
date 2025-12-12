@@ -46,7 +46,11 @@ import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Label
 import androidx.compose.material.icons.filled.TextFields
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.Translate
+import androidx.compose.material3.IconButton
+import androidx.compose.runtime.collectAsState
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.icons.filled.DeleteSweep
@@ -138,6 +142,10 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
+import me.bmax.apatch.ui.theme.MusicConfig
+import me.bmax.apatch.util.MusicManager
+import androidx.compose.material.icons.filled.MusicNote
+import androidx.compose.material.icons.filled.Headset
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Update
 import androidx.compose.material.icons.filled.Tune
@@ -145,8 +153,17 @@ import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.TouchApp
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Extension
+import androidx.compose.material.icons.filled.Dashboard
 import me.bmax.apatch.util.UpdateChecker
 import me.bmax.apatch.ui.component.UpdateDialog
+import androidx.compose.material.icons.filled.MusicNote
+
+@Composable
+fun formatTime(millis: Int): String {
+    val seconds = (millis / 1000) % 60
+    val minutes = (millis / (1000 * 60)) % 60
+    return String.format("%02d:%02d", minutes, seconds)
+}
 
 @Destination<RootGraph>
 @Composable
@@ -251,7 +268,7 @@ fun SettingScreen(navigator: DestinationsNavigator) {
         val prefs = APApplication.sharedPreferences
 
         // General
-        var autoUpdateCheck by rememberSaveable { mutableStateOf(prefs.getBoolean("auto_update_check", false)) }
+        var autoUpdateCheck by rememberSaveable { mutableStateOf(prefs.getBoolean("auto_update_check", true)) }
         val showUpdateDialog = remember { mutableStateOf(false) }
         val showDpiDialog = remember { mutableStateOf(false) }
 
@@ -334,6 +351,25 @@ fun SettingScreen(navigator: DestinationsNavigator) {
             }
         }
 
+        // Music Launcher
+        val pickMusicLauncher = rememberLauncherForActivityResult(
+            ActivityResultContracts.GetContent()
+        ) { uri: Uri? ->
+            uri?.let {
+                scope.launch {
+                    loadingDialog.show()
+                    val success = MusicConfig.saveMusicFile(context, it)
+                    loadingDialog.hide()
+                    if (success) {
+                        snackBarHost.showSnackbar(message = context.getString(R.string.settings_music_saved))
+                        MusicManager.reload()
+                    } else {
+                        snackBarHost.showSnackbar(message = context.getString(R.string.settings_music_save_error))
+                    }
+                }
+            }
+        }
+
         // Theme Export/Import
         var pendingExportMetadata by remember { mutableStateOf<ThemeManager.ThemeMetadata?>(null) }
         val showExportDialog = remember { mutableStateOf(false) }
@@ -397,7 +433,6 @@ fun SettingScreen(navigator: DestinationsNavigator) {
         var hideSuPath by rememberSaveable { mutableStateOf(prefs.getBoolean("hide_su_path", false)) }
         var hideKpatchVersion by rememberSaveable { mutableStateOf(prefs.getBoolean("hide_kpatch_version", false)) }
         var hideFingerprint by rememberSaveable { mutableStateOf(prefs.getBoolean("hide_fingerprint", false)) }
-        var simpleKernelVersionMode by rememberSaveable { mutableStateOf(prefs.getBoolean("simple_kernel_version_mode", false)) }
 
         // Module
         var autoBackupModule by rememberSaveable { mutableStateOf(prefs.getBoolean("auto_backup_module", false)) }
@@ -983,6 +1018,8 @@ fun SettingScreen(navigator: DestinationsNavigator) {
                     }
                 }
 
+                // Background Music (Removed from here)
+                
                 // Theme Store/Import/Export
                 ListItem(
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
@@ -1011,6 +1048,9 @@ fun SettingScreen(navigator: DestinationsNavigator) {
                     leadingContent = { Icon(Icons.Filled.Folder, null) }
                 )
             }
+            
+            // Multimedia (Moved)
+
 
             // Behavior Category
             SettingsCategory(icon = Icons.Filled.TouchApp, title = stringResource(R.string.settings_category_behavior)) {
@@ -1100,16 +1140,6 @@ fun SettingScreen(navigator: DestinationsNavigator) {
                     prefs.edit { putBoolean("hide_fingerprint", it) }
                     hideFingerprint = it
                 }
-                
-                SwitchItem(
-                    icon = Icons.Filled.Visibility,
-                    title = stringResource(id = R.string.settings_simple_kernel_version_mode),
-                    summary = stringResource(id = R.string.settings_simple_kernel_version_mode_summary),
-                    checked = simpleKernelVersionMode
-                ) {
-                    prefs.edit { putBoolean("simple_kernel_version_mode", it) }
-                    simpleKernelVersionMode = it
-                }
             }
 
             // Security Category
@@ -1154,6 +1184,161 @@ fun SettingScreen(navigator: DestinationsNavigator) {
                         bSkipStoreSuperKey = it
                         APatchKeyHelper.setShouldSkipStoreSuperKey(bSkipStoreSuperKey)
                     })
+            }
+
+            // Multimedia Category
+            SettingsCategory(
+                title = stringResource(id = R.string.settings_category_multimedia),
+                icon = Icons.Filled.Headset
+            ) {
+                // Background Music
+                SwitchItem(
+                    icon = Icons.Filled.Headset,
+                    title = stringResource(id = R.string.settings_background_music),
+                    summary = if (MusicConfig.isMusicEnabled) {
+                        if (MusicConfig.musicFilename != null) {
+                            stringResource(id = R.string.settings_background_music_playing, MusicConfig.musicFilename!!)
+                        } else {
+                            stringResource(id = R.string.settings_background_music_enabled)
+                        }
+                    } else {
+                        stringResource(id = R.string.settings_background_music_summary)
+                    },
+                    checked = MusicConfig.isMusicEnabled
+                ) {
+                    MusicConfig.setMusicEnabledState(it)
+                    MusicConfig.save(context)
+                    MusicManager.reload()
+                }
+
+                if (MusicConfig.isMusicEnabled) {
+                    // Select Music File
+                    ListItem(
+                        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                        headlineContent = { Text(text = stringResource(id = R.string.settings_select_music_file)) },
+                        supportingContent = {
+                            if (MusicConfig.musicFilename != null) {
+                                Text(
+                                    text = stringResource(id = R.string.settings_music_selected),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.outline
+                                )
+                            }
+                        },
+                        leadingContent = { Icon(Icons.Filled.Headset, null) },
+                        modifier = Modifier.clickable {
+                            try {
+                                pickMusicLauncher.launch("audio/*")
+                            } catch (e: ActivityNotFoundException) {
+                                Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    )
+
+                    // Auto Play
+                    SwitchItem(
+                        icon = Icons.Filled.TouchApp,
+                        title = stringResource(id = R.string.settings_music_auto_play),
+                        summary = stringResource(id = R.string.settings_music_auto_play_summary),
+                        checked = MusicConfig.isAutoPlayEnabled
+                    ) {
+                        MusicConfig.setAutoPlayEnabledState(it)
+                        MusicConfig.save(context)
+                    }
+
+                    // Volume
+                    ListItem(
+                        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                        headlineContent = { Text(stringResource(id = R.string.settings_music_volume)) },
+                        supportingContent = {
+                            androidx.compose.material3.Slider(
+                                value = MusicConfig.volume,
+                                onValueChange = { 
+                                    MusicConfig.setVolumeValue(it)
+                                    MusicManager.updateVolume(it)
+                                },
+                                onValueChangeFinished = { MusicConfig.save(context) },
+                                valueRange = 0f..1f,
+                                colors = androidx.compose.material3.SliderDefaults.colors(
+                                    thumbColor = MaterialTheme.colorScheme.primary.copy(alpha = 1f),
+                                    activeTrackColor = MaterialTheme.colorScheme.primary.copy(alpha = 1f)
+                                )
+                            )
+                        }
+                    )
+
+                    // Playback Progress
+                    val currentPosition by MusicManager.currentPosition.collectAsState(initial = 0)
+                    val duration by MusicManager.duration.collectAsState(initial = 0)
+                    val isPlaying by MusicManager.isPlaying.collectAsState(initial = false)
+
+                    if (duration > 0) {
+                        ListItem(
+                            colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                            headlineContent = { Text(stringResource(id = R.string.settings_music_playback_control)) },
+                            supportingContent = {
+                                Column {
+                                    androidx.compose.material3.Slider(
+                                        value = currentPosition.toFloat(),
+                                        onValueChange = { 
+                                            MusicManager.seekTo(it.toInt())
+                                        },
+                                        valueRange = 0f..duration.toFloat(),
+                                        colors = androidx.compose.material3.SliderDefaults.colors(
+                                            thumbColor = MaterialTheme.colorScheme.primary.copy(alpha = 1f),
+                                            activeTrackColor = MaterialTheme.colorScheme.primary.copy(alpha = 1f)
+                                        )
+                                    )
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween
+                                    ) {
+                                        Text(
+                                            text = formatTime(currentPosition),
+                                            style = MaterialTheme.typography.bodySmall
+                                        )
+                                        Text(
+                                            text = formatTime(duration),
+                                            style = MaterialTheme.typography.bodySmall
+                                        )
+                                    }
+                                }
+                            },
+                            trailingContent = {
+                                IconButton(onClick = { MusicManager.toggle() }) {
+                                    Icon(
+                                        imageVector = if (isPlaying) Icons.Filled.Pause else Icons.Filled.PlayArrow,
+                                        contentDescription = null
+                                    )
+                                }
+                            }
+                        )
+                    }
+
+                    // Clear Music
+                    if (MusicConfig.musicFilename != null) {
+                        val clearMusicDialog = rememberConfirmDialog(
+                            onConfirm = {
+                                MusicConfig.clearMusic(context)
+                                MusicManager.stop()
+                                scope.launch {
+                                    snackBarHost.showSnackbar(message = context.getString(R.string.settings_music_cleared))
+                                }
+                            }
+                        )
+                        ListItem(
+                            colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                            headlineContent = { Text(text = stringResource(id = R.string.settings_clear_music)) },
+                            leadingContent = { Icon(Icons.Filled.DeleteSweep, null) },
+                            modifier = Modifier.clickable {
+                                clearMusicDialog.showConfirm(
+                                    title = context.getString(R.string.settings_clear_music),
+                                    content = context.getString(R.string.settings_clear_music_confirm)
+                                )
+                            }
+                        )
+                    }
+                }
             }
 
             // Module Category
@@ -1622,6 +1807,7 @@ fun LanguageDialog(showLanguageDialog: MutableState<Boolean>) {
                     }
                 }
             }
+
             val dialogWindowProvider = LocalView.current.parent as DialogWindowProvider
             APDialogBlurBehindUtils.setupWindowBlurListener(dialogWindowProvider.window)
         }

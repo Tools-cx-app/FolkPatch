@@ -407,8 +407,6 @@
     <string name="auto_backup_success">星之魔法阵保存成功: %s</string>
 
     <!-- Auto-added missing strings -->
-    <string name="settings_simple_kernel_version_mode_summary">隐藏魔法卡片中的星之版本信息</string>
-    <string name="settings_simple_kernel_version_mode">简约星之版本模式</string>
 
     <!-- Home Layout Strings -->
     <string name="settings_home_layout_style">魔法大厅布局样式</string>
@@ -485,4 +483,22 @@
     <string name="settings_category_behavior">咒语指令</string>
     <string name="settings_category_module">魔法模组</string>
     <string name="settings_category_security">结界守护</string>
+    
+    <!-- 背景音乐字符串（魔法少女风格版） -->
+    <string name="settings_background_music">魔法颂歌</string>
+    <string name="settings_background_music_summary">少女开启魔法模式时，奏响魔法颂歌</string>
+    <string name="settings_background_music_playing">颂歌吟唱中: %s</string>
+    <string name="settings_background_music_enabled">魔法颂歌已激活</string>
+    <string name="settings_select_music_file">挑选魔法旋律水晶</string>
+    <string name="settings_music_selected">魔法旋律水晶已选定</string>
+    <string name="settings_clear_music">清空魔法颂歌</string>
+    <string name="settings_clear_music_confirm">确定要清空当前的魔法颂歌吗？</string>
+    <string name="settings_music_auto_play">颂歌自动吟唱</string>
+    <string name="settings_music_auto_play_summary">启动魔法终端时，颂歌自动吟唱</string>
+    <string name="settings_music_volume">颂歌音量</string>
+    <string name="settings_music_saved">魔法旋律水晶已封存</string>
+    <string name="settings_music_save_error">魔法旋律水晶封存失败</string>
+    <string name="settings_music_cleared">魔法颂歌已清空</string>
+    <string name="settings_category_multimedia">魔法幻音</string>
+    <string name="settings_music_playback_control">颂歌控法阵</string>
 </resources>

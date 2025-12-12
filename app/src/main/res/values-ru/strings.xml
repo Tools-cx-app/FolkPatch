@@ -414,8 +414,6 @@
     <string name="auto_backup_success">Резервная копия создана: %s</string>
 
     <!-- Auto-added missing strings -->
-    <string name="settings_simple_kernel_version_mode_summary">Скрыть информацию о версии в рабочей карточке, когда включено</string>
-    <string name="settings_simple_kernel_version_mode">Лаконичный режим версии ядра</string>
 
     <!-- Home Layout Strings -->
     <string name="settings_home_layout_style">Стиль главной страницы</string>
@@ -489,4 +487,22 @@
     <string name="settings_category_behavior">Поведение</string>
     <string name="settings_category_module">Модули</string>
     <string name="settings_category_security">Безопасность</string>
+    
+    <!-- Background Music Strings -->
+    <string name="settings_background_music">Фоновая музыка</string>
+    <string name="settings_background_music_summary">Воспроизводить фоновую музыку, когда приложение на переднем плане</string>
+    <string name="settings_background_music_playing">Воспроизведение: %s</string>
+    <string name="settings_background_music_enabled">Фоновая музыка включена</string>
+    <string name="settings_select_music_file">Выбрать музыкальный файл</string>
+    <string name="settings_music_selected">Музыка выбрана</string>
+    <string name="settings_clear_music">Очистить музыку</string>
+    <string name="settings_clear_music_confirm">Вы уверены, что хотите очистить фоновую музыку?</string>
+    <string name="settings_music_auto_play">Автовоспроизведение</string>
+    <string name="settings_music_auto_play_summary">Автоматически воспроизводить музыку при открытии приложения</string>
+    <string name="settings_music_volume">Громкость</string>
+    <string name="settings_music_saved">Музыкальный файл сохранён</string>
+    <string name="settings_music_save_error">Не удалось сохранить музыкальный файл</string>
+    <string name="settings_music_cleared">Музыка очищена</string>
+    <string name="settings_category_multimedia">Мультимедиа</string>
+    <string name="settings_music_playback_control">Управление воспроизведением</string>
 </resources>

@@ -405,8 +405,6 @@
     <string name="auto_backup_success">自动拓印圆满: %s</string>
 
     <!-- Auto-added missing strings -->
-    <string name="settings_simple_kernel_version_mode_summary">启此式，隐仙门事宜仙笺之详述</string>
-    <string name="settings_simple_kernel_version_mode">简约道核篇次之式</string>
     <string name="app_title_magicpatch">MagicPatch</string>
 
     <!-- Home Layout Strings -->
@@ -482,4 +480,22 @@
     <string name="settings_category_behavior">功法运转</string>
     <string name="settings_category_module">悟道模块</string>
     <string name="settings_category_security">护道结界</string>
+    
+    <!-- 背景音乐字符串（修仙风格版） -->
+    <string name="settings_background_music">仙音缭绕</string>
+    <string name="settings_background_music_summary">仙门驻留时，伴仙音袅袅</string>
+    <string name="settings_background_music_playing">仙音奏响: %s</string>
+    <string name="settings_background_music_enabled">仙音已启</string>
+    <string name="settings_select_music_file">择取仙音玉简</string>
+    <string name="settings_music_selected">仙音玉简已选定</string>
+    <string name="settings_clear_music">涤除仙音</string>
+    <string name="settings_clear_music_confirm">是否确定涤除当前仙音缭绕？</string>
+    <string name="settings_music_auto_play">仙音自鸣</string>
+    <string name="settings_music_auto_play_summary">踏入仙门时，仙音自鸣相伴</string>
+    <string name="settings_music_volume">仙音响度</string>
+    <string name="settings_music_saved">仙音玉简已封存</string>
+    <string name="settings_music_save_error">仙音玉简封存失败</string>
+    <string name="settings_music_cleared">仙音已涤除</string>
+    <string name="settings_category_multimedia">仙音阁</string>
+    <string name="settings_music_playback_control">仙音法阵</string>
 </resources>

@@ -398,8 +398,6 @@
     <string name="apm_backup_failed_msg">Sao lưu thất bại: %s</string>
     <string name="apm_restore_failed_msg">Khôi phục thất bại: %s</string>
     
-    <string name="settings_simple_kernel_version_mode">Chế độ đơn giản phiên bản nhân</string>
-    <string name="settings_simple_kernel_version_mode_summary">Sau khi bật, không hiển thị thông tin phiên bản ở dưới chữ người làm việc của thẻ đang làm việc</string>
 
     <!-- Auto Backup Strings -->
     <string name="settings_auto_backup_module">Sao lưu tự động module hệ thống</string>
@@ -486,4 +484,22 @@
     <string name="settings_category_behavior">Hành vi</string>
     <string name="settings_category_module">Mô-đun</string>
     <string name="settings_category_security">Bảo mật</string>
+    
+    <!-- Background Music Strings -->
+    <string name="settings_background_music">Nhạc nền</string>
+    <string name="settings_background_music_summary">Phát nhạc nền khi ứng dụng ở foreground</string>
+    <string name="settings_background_music_playing">Đang phát: %s</string>
+    <string name="settings_background_music_enabled">Nhạc nền đã được kích hoạt</string>
+    <string name="settings_select_music_file">Chọn tệp nhạc</string>
+    <string name="settings_music_selected">Nhạc đã chọn</string>
+    <string name="settings_clear_music">Xóa nhạc</string>
+    <string name="settings_clear_music_confirm">Bạn có chắc muốn xóa nhạc nền không?</string>
+    <string name="settings_music_auto_play">Tự động phát</string>
+    <string name="settings_music_auto_play_summary">Tự động phát nhạc khi mở ứng dụng</string>
+    <string name="settings_music_volume">Âm lượng</string>
+    <string name="settings_music_saved">Tệp nhạc đã được lưu</string>
+    <string name="settings_music_save_error">Lưu tệp nhạc thất bại</string>
+    <string name="settings_music_cleared">Nhạc đã được xóa</string>
+    <string name="settings_category_multimedia">Đa phương tiện</string>
+    <string name="settings_music_playback_control">Điều khiển phát nhạc</string>
 </resources>

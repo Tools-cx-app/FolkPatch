@@ -398,8 +398,6 @@
     <string name="auto_backup_failed">Pencadangan otomatis gagal: %s</string>
     <string name="auto_backup_success">Pencadangan otomatis berhasil: %s</string>
 
-    <string name="settings_simple_kernel_version_mode_summary">Sembunyikan informasi versi di kartu kerja saat diaktifkan</string>
-    <string name="settings_simple_kernel_version_mode">Mode Versi Kernel Ringkas</string>
 
     <string name="settings_home_layout_style">Gaya tata letak utama</string>
     <string name="settings_home_layout_default">ListUI</string>
@@ -469,4 +467,22 @@
     <string name="settings_category_behavior">Perilaku</string>
     <string name="settings_category_module">Modul</string>
     <string name="settings_category_security">Keamanan</string>
+    
+    <!-- Background Music Strings -->
+    <string name="settings_background_music">Musik Latar Belakang</string>
+    <string name="settings_background_music_summary">Putar musik latar belakang saat aplikasi di latar depan</string>
+    <string name="settings_background_music_playing">Memutar: %s</string>
+    <string name="settings_background_music_enabled">Musik Latar Belakang Diaktifkan</string>
+    <string name="settings_select_music_file">Pilih file musik</string>
+    <string name="settings_music_selected">Musik dipilih</string>
+    <string name="settings_clear_music">Hapus musik</string>
+    <string name="settings_clear_music_confirm">Apakah Anda yakin ingin menghapus musik latar belakang?</string>
+    <string name="settings_music_auto_play">Putar otomatis</string>
+    <string name="settings_music_auto_play_summary">Otomatis memutar musik saat aplikasi dibuka</string>
+    <string name="settings_music_volume">Volume</string>
+    <string name="settings_music_saved">File musik disimpan</string>
+    <string name="settings_music_save_error">Gagal menyimpan file musik</string>
+    <string name="settings_music_cleared">Musik dihapus</string>
+    <string name="settings_category_multimedia">Multimedia</string>
+    <string name="settings_music_playback_control">Kontrol Pemutaran</string>
 </resources>

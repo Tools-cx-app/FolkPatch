@@ -407,8 +407,6 @@
     <string name="kpm_page_first_time_title">Warning</string>
     <string name="kpm_page_first_time_message">Kernel modules directly modify the Boot implementation. Unlike system modules, they lack a good recovery mechanism. If issues arise, you can only fix them by entering Fastboot. It is recommended to load the module first to ensure there are no problems before embedding it into Boot. If a module can only be used by loading, you can try the automatic KPM module loading feature. If you do not understand kernel modules, please do not use this feature!</string>
     
-    <string name="settings_simple_kernel_version_mode">Concise Kernel Version Mode</string>
-    <string name="settings_simple_kernel_version_mode_summary">Hide version info in the working card when enabled</string>
     
     <!-- Auto Backup Strings -->
     <string name="settings_auto_backup_module">Auto Backup System Modules</string>
@@ -491,4 +489,22 @@
     <string name="settings_category_behavior">Behavior</string>
     <string name="settings_category_module">Modules</string>
     <string name="settings_category_security">Security</string>
+    
+    <!-- Background Music Strings -->
+    <string name="settings_background_music">Background Music</string>
+    <string name="settings_background_music_summary">Play background music when app is in foreground</string>
+    <string name="settings_background_music_playing">Playing: %s</string>
+    <string name="settings_background_music_enabled">Background Music Enabled</string>
+    <string name="settings_select_music_file">Select music file</string>
+    <string name="settings_music_selected">Music selected</string>
+    <string name="settings_clear_music">Clear music</string>
+    <string name="settings_clear_music_confirm">Are you sure you want to clear the background music?</string>
+    <string name="settings_music_auto_play">Auto play</string>
+    <string name="settings_music_auto_play_summary">Automatically play music when app opens</string>
+    <string name="settings_music_volume">Volume</string>
+    <string name="settings_music_saved">Music file saved</string>
+    <string name="settings_music_save_error">Failed to save music file</string>
+    <string name="settings_music_cleared">Music cleared</string>
+    <string name="settings_category_multimedia">Multimedia</string>
+    <string name="settings_music_playback_control">Playback Control</string>
 </resources>

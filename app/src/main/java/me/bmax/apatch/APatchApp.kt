@@ -16,6 +16,8 @@ import me.bmax.apatch.ui.CrashHandleActivity
 import me.bmax.apatch.ui.component.KpmAutoLoadManager
 import me.bmax.apatch.util.APatchCli
 import me.bmax.apatch.util.APatchKeyHelper
+import me.bmax.apatch.ui.theme.MusicConfig
+import me.bmax.apatch.util.MusicManager
 import me.bmax.apatch.util.Version
 import me.bmax.apatch.util.getRootShell
 import me.bmax.apatch.util.rootShellForResult
@@ -318,6 +320,10 @@ class APApplication : Application(), Thread.UncaughtExceptionHandler, ImageLoade
                             .header("Accept-Language", Locale.getDefault().toLanguageTag()).build()
                     )
                 }.build()
+
+        // Initialize Music
+        MusicConfig.load(this)
+        MusicManager.init(this)
         
         Log.d(TAG, "APApplication onCreate completed")
     }
