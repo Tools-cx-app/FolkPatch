@@ -343,6 +343,8 @@
     <string name="settings_video_background_summary">Use a video as background</string>
     <string name="settings_select_video">Select Video</string>
     <string name="settings_video_selected">Video Selected</string>
+    <string name="settings_clear_video_background">Clear Video Background</string>
+    <string name="settings_clear_video_background_confirm">Are you sure you want to clear the video background?</string>
     <string name="settings_video_background_enabled">Video Background Enabled</string>
     <string name="settings_video_volume">Video Volume</string>
     <string name="launcher_icon_kernelsu_next">KernelSU Next</string>

@@ -519,6 +519,8 @@
     <string name="settings_select_video">选择魔法影像</string>
     <string name="settings_video_selected">已选择魔法影像</string>
     <string name="settings_video_background_enabled">魔法影像背景已激活</string>
+    <string name="settings_clear_video_background">清除魔法影像</string>
+    <string name="settings_clear_video_background_confirm">确定要清除魔法影像吗？</string>
     <string name="settings_video_volume">魔法影像音量</string>
     <!-- File Picker -->
     <string name="file_picker_permission_required">需要魔法权限</string>

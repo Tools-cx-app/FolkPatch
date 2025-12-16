@@ -516,6 +516,8 @@
     <string name="settings_select_video">择影像</string>
     <string name="settings_video_selected">影像已择</string>
     <string name="settings_video_background_enabled">影像仙幕已启</string>
+    <string name="settings_clear_video_background">涤除影像仙幕</string>
+    <string name="settings_clear_video_background_confirm">确要涤除影像仙幕？</string>
     <string name="settings_video_volume">影像音量</string>
     <!-- File Picker -->
     <string name="file_picker_permission_required">需道友赐法</string>

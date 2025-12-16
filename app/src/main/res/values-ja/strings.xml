@@ -480,6 +480,8 @@
     <string name="settings_select_video">ビデオを選択</string>
     <string name="settings_video_selected">ビデオが選択されました</string>
     <string name="settings_video_background_enabled">ビデオ背景が有効</string>
+    <string name="settings_clear_video_background">ビデオ壁紙をクリア</string>
+    <string name="settings_clear_video_background_confirm">ビデオ壁紙をクリアしてもよろしいですか？</string>
     <string name="settings_video_volume">ビデオ音量</string>
     <!-- File Picker -->
     <string name="file_picker_permission_required">権限が必要です</string>

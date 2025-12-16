@@ -521,6 +521,8 @@
     <string name="settings_select_video">Wybierz Wideo</string>
     <string name="settings_video_selected">Wideo Wybrane</string>
     <string name="settings_video_background_enabled">Tło Wideo Włączone</string>
+    <string name="settings_clear_video_background">Wyczyść tapetę wideo</string>
+    <string name="settings_clear_video_background_confirm">Czy na pewno chcesz wyczyścić tapetę wideo?</string>
     <string name="settings_video_volume">Głośność Wideo</string>
     <!-- File Picker -->
     <string name="file_picker_permission_required">Wymagane uprawnienia</string>

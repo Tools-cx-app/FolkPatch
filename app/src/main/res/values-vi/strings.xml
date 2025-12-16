@@ -520,6 +520,8 @@
     <string name="settings_select_video">Chọn Video</string>
     <string name="settings_video_selected">Đã Chọn Video</string>
     <string name="settings_video_background_enabled">Nền Video Đã Bật</string>
+    <string name="settings_clear_video_background">Xóa hình nền video</string>
+    <string name="settings_clear_video_background_confirm">Bạn có chắc chắn muốn xóa hình nền video không?</string>
     <string name="settings_video_volume">Âm Lượng Video</string>
     <!-- File Picker -->
     <string name="file_picker_permission_required">Cần quyền truy cập</string>

@@ -320,7 +320,7 @@
     <string name="settings_custom_background_saved">背景保存成功</string>
     <string name="settings_custom_background_error">保存背景失败</string>
     <string name="settings_background_selected">已选择背景</string>
-    <string name="settings_background_image_cleared">背景图片已清除</string>
+    <string name="settings_background_image_cleared">已移除背景</string>
     <string name="settings_clear_background">清除背景</string>
     <string name="settings_clear_background_confirm">确定要清除背景图片吗？</string>
 
@@ -336,6 +336,8 @@
     <string name="settings_video_background_summary">使用视频作为背景</string>
     <string name="settings_select_video">选择视频</string>
     <string name="settings_video_selected">已选择视频</string>
+    <string name="settings_clear_video_background">清除视频壁纸</string>
+    <string name="settings_clear_video_background_confirm">确定要清除视频壁纸吗？</string>
     <string name="settings_video_background_enabled">视频背景已启用</string>
     <string name="settings_video_volume">视频音量</string>
     <string name="launcher_icon_kernelsu_next">KernelSU Next</string>

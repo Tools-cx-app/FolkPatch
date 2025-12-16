@@ -521,6 +521,8 @@
     <string name="settings_select_video">选择圣光影像</string>
     <string name="settings_video_selected">已选择圣光影像</string>
     <string name="settings_video_background_enabled">圣光影像背景已启用</string>
+    <string name="settings_clear_video_background">清除圣光影像</string>
+    <string name="settings_clear_video_background_confirm">确定要清除圣光影像吗？</string>
     <string name="settings_video_volume">圣光影像音量</string>
     <!-- File Picker -->
     <string name="file_picker_permission_required">需要神恩</string>

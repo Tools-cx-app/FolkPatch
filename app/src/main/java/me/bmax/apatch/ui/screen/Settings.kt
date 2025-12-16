@@ -776,6 +776,9 @@ fun SettingScreen(navigator: DestinationsNavigator) {
             val videoVolumeTitle = stringResource(id = R.string.settings_video_volume)
             val showVideoVolume = BackgroundConfig.isCustomBackgroundEnabled && BackgroundConfig.isVideoBackgroundEnabled && (matchAppearance || shouldShow(videoVolumeTitle))
             
+            val videoClearTitle = stringResource(id = R.string.settings_clear_video_background)
+            val showVideoClear = BackgroundConfig.isCustomBackgroundEnabled && BackgroundConfig.isVideoBackgroundEnabled && !BackgroundConfig.videoBackgroundUri.isNullOrEmpty() && (matchAppearance || shouldShow(videoClearTitle))
+            
             val multiBackgroundTitle = stringResource(id = R.string.settings_multi_background_mode)
             val multiBackgroundSummary = stringResource(id = R.string.settings_multi_background_mode_summary)
             val showMultiBackgroundSwitch = BackgroundConfig.isCustomBackgroundEnabled && !BackgroundConfig.isVideoBackgroundEnabled && (matchAppearance || shouldShow(multiBackgroundTitle, multiBackgroundSummary))
@@ -1101,6 +1104,33 @@ fun SettingScreen(navigator: DestinationsNavigator) {
                                         } else {
                                             Toast.makeText(context, "请先授予存储权限才能选择背景视频", Toast.LENGTH_SHORT).show()
                                         }
+                                    }
+                                )
+                            }
+                            
+                            val clearVideoDialog = rememberConfirmDialog(
+                                onConfirm = {
+                                    scope.launch {
+                                        loadingDialog.show()
+                                        BackgroundManager.clearVideoBackground(context)
+                                        loadingDialog.hide()
+                                        snackBarHost.showSnackbar(message = context.getString(R.string.settings_background_image_cleared))
+                                        refreshTheme.value = true
+                                    }
+                                }
+                            )
+
+                            if (showVideoClear) {
+                                ListItem(
+                                    colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                                    headlineContent = { Text(text = videoClearTitle) },
+                                    leadingContent = { Icon(painterResource(id = R.drawable.ic_clear_background), null) },
+                                    modifier = Modifier.clickable {
+                                        clearVideoDialog.showConfirm(
+                                            title = videoClearTitle,
+                                            content = context.getString(R.string.settings_clear_video_background_confirm),
+                                            markdown = false
+                                        )
                                     }
                                 )
                             }

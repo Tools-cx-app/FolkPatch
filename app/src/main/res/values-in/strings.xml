@@ -503,6 +503,8 @@
     <string name="settings_select_video">Pilih Video</string>
     <string name="settings_video_selected">Video Dipilih</string>
     <string name="settings_video_background_enabled">Latar Belakang Video Diaktifkan</string>
+    <string name="settings_clear_video_background">Hapus Wallpaper Video</string>
+    <string name="settings_clear_video_background_confirm">Apakah Anda yakin ingin menghapus wallpaper video?</string>
     <string name="settings_video_volume">Volume Video</string>
     <!-- File Picker -->
     <string name="file_picker_permission_required">Izin Diperlukan</string>

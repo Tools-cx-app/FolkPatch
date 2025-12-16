@@ -18,9 +18,9 @@ object BackgroundConfig {// State
         private set
     var isCustomBackgroundEnabled: Boolean by mutableStateOf(true)
         private set
-    var customBackgroundOpacity: Float by mutableStateOf(0.5f)
+    var customBackgroundOpacity: Float by mutableStateOf(0.7f)
         private set
-    var customBackgroundDim: Float by mutableStateOf(0.2f)
+    var customBackgroundDim: Float by mutableStateOf(0.0f)
         private set
 
     // Video Background
@@ -221,8 +221,8 @@ object BackgroundConfig {// State
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val uri = prefs.getString(KEY_CUSTOM_BACKGROUND_URI, "background.png")
         val enabled = prefs.getBoolean(KEY_CUSTOM_BACKGROUND_ENABLED, true)
-        val opacity = prefs.getFloat(KEY_CUSTOM_BACKGROUND_OPACITY, 0.5f)
-        val dim = prefs.getFloat(KEY_CUSTOM_BACKGROUND_DIM, 0.2f)
+        val opacity = prefs.getFloat(KEY_CUSTOM_BACKGROUND_OPACITY, 0.7f)
+        val dim = prefs.getFloat(KEY_CUSTOM_BACKGROUND_DIM, 0.0f)
         
         val videoUri = prefs.getString(KEY_VIDEO_BACKGROUND_URI, null)
         val videoEnabled = prefs.getBoolean(KEY_VIDEO_BACKGROUND_ENABLED, false)
@@ -271,8 +271,8 @@ object BackgroundConfig {// State
         // Default to custom background enabled with "background.png"
         customBackgroundUri = "background.png"
         isCustomBackgroundEnabled = true
-        customBackgroundOpacity = 0.5f
-        customBackgroundDim = 0.2f
+        customBackgroundOpacity = 0.7f
+        customBackgroundDim = 0.0f
         
         videoBackgroundUri = null
         isVideoBackgroundEnabled = false

@@ -513,6 +513,8 @@
     <string name="settings_select_video">選擇影片</string>
     <string name="settings_video_selected">已選擇影片</string>
     <string name="settings_video_background_enabled">影片背景已啟用</string>
+    <string name="settings_clear_video_background">清除影片壁紙</string>
+    <string name="settings_clear_video_background_confirm">確定要清除影片壁紙嗎？</string>
     <string name="settings_video_volume">影片音量</string>
     <!-- File Picker -->
     <string name="file_picker_permission_required">需要權限</string>

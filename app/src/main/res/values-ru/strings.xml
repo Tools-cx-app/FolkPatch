@@ -523,6 +523,8 @@
     <string name="settings_select_video">Выбрать Видео</string>
     <string name="settings_video_selected">Видео Выбрано</string>
     <string name="settings_video_background_enabled">Видеофон Включен</string>
+    <string name="settings_clear_video_background">Очистить видеообои</string>
+    <string name="settings_clear_video_background_confirm">Вы уверены, что хотите очистить видеообои?</string>
     <string name="settings_video_volume">Громкость Видео</string>
     <!-- File Picker -->
     <string name="file_picker_permission_required">Требуется разрешение</string>
