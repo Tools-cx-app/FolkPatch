@@ -327,6 +327,7 @@
     <string name="settings_custom_background">Custom Background</string>
     <string name="settings_custom_background_enabled">Custom Background Enabled</string>
     <string name="settings_custom_background_opacity">Card opacity</string>
+    <string name="settings_custom_background_blur">Background blur</string>
     <string name="settings_custom_background_dim">Background dim</string>
     <string name="settings_custom_background_dual_dim">Enable dual day/night dim</string>
     <string name="settings_custom_background_day_dim">Day mode background dim</string>

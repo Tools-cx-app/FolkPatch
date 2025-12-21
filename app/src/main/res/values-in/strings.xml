@@ -317,6 +317,7 @@
     <string name="settings_custom_background">Latar Belakang Kustom</string>
     <string name="settings_custom_background_enabled">Latar Belakang Kustom diaktifkan</string>
     <string name="settings_custom_background_opacity">Opasitas Kartu</string>
+    <string name="settings_custom_background_blur">Buram Latar Belakang</string>
     <string name="settings_custom_background_dim">Redup Latar Belakang</string>
     <string name="settings_select_background_image">Pilih gambar latar belakang</string>
     <string name="settings_custom_background_summary">Atur gambar latar belakang kustom</string>

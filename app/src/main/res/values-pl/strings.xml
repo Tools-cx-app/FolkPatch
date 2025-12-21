@@ -321,6 +321,7 @@
     <string name="settings_custom_background">Niestandardowe tło</string>
     <string name="settings_custom_background_enabled">Włączono niestandardowe tło</string>
     <string name="settings_custom_background_opacity">Przezroczystość karty</string>
+    <string name="settings_custom_background_blur">Rozmycie tła</string>
     <string name="settings_custom_background_dim">Przyciemnienie tła</string>
     <string name="settings_select_background_image">Wybierz obraz tła</string>
     <string name="settings_custom_background_summary">Ustaw niestandardowy obraz tła</string>

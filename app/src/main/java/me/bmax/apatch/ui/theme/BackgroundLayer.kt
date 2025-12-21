@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.draw.blur
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -238,11 +239,21 @@ private fun RenderBackgroundImage(rawTargetUri: String?, isDarkTheme: Boolean) {
             }
         )
 
-        Box(
+        // Use Image composable instead of Box + paint for better compatibility with Modifier.blur
+        Image(
+            painter = painter,
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxSize()
                 .zIndex(-2f)
-                .paint(painter = painter, contentScale = ContentScale.Crop)
+                .let {
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S && BackgroundConfig.customBackgroundBlur > 0f) {
+                        it.blur(radius = BackgroundConfig.customBackgroundBlur.dp)
+                    } else {
+                        it
+                    }
+                }
         )
 
         // Dim overlay for image

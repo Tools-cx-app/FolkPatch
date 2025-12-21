@@ -327,6 +327,7 @@
     <string name="settings_custom_background">Fondo Personalizado</string>
     <string name="settings_custom_background_enabled">Fondo Personalizado Habilitado</string>
     <string name="settings_custom_background_opacity">Opacidad de tarjetas</string>
+    <string name="settings_custom_background_blur">Desenfoque del fondo</string>
     <string name="settings_custom_background_dim">Atenuación del fondo</string>
     <string name="settings_custom_background_dual_dim">Habilitar atenuación dual día/noche</string>
     <string name="settings_custom_background_day_dim">Atenuación de fondo en modo día</string>

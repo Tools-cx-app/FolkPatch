@@ -310,6 +310,7 @@
     <string name="settings_custom_background">自定仙府背景</string>
     <string name="settings_custom_background_enabled">已启自定仙府背景</string>
     <string name="settings_custom_background_opacity">仙笺透度</string>
+    <string name="settings_custom_background_blur">仙府背景模糊</string>
     <string name="settings_custom_background_dim">仙府暗度</string>
     <string name="settings_select_background_image">择仙府背景图</string>
     <string name="settings_custom_background_summary">设自定仙府背景图</string>

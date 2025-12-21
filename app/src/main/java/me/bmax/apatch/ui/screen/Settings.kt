@@ -891,6 +891,11 @@ fun SettingScreen(navigator: DestinationsNavigator) {
             val customOpacityTitle = stringResource(id = R.string.settings_custom_background_opacity)
             val showCustomOpacity = BackgroundConfig.isCustomBackgroundEnabled && (matchAppearance || shouldShow(customOpacityTitle))
             
+            val customBlurTitle = stringResource(id = R.string.settings_custom_background_blur)
+            // Blur is only supported on Android 12+ (API 31+)
+            val isBlurSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+            val showCustomBlur = BackgroundConfig.isCustomBackgroundEnabled && isBlurSupported && (matchAppearance || shouldShow(customBlurTitle))
+
             val customDimTitle = stringResource(id = R.string.settings_custom_background_dim)
             val showCustomDim = BackgroundConfig.isCustomBackgroundEnabled && !BackgroundConfig.isDualBackgroundDimEnabled && (matchAppearance || shouldShow(customDimTitle))
 
@@ -1303,6 +1308,26 @@ fun SettingScreen(navigator: DestinationsNavigator) {
                                 }
                             )
                         }
+                        
+                        if (showCustomBlur) {
+                            ListItem(
+                                colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                                headlineContent = { Text(customBlurTitle) },
+                                supportingContent = {
+                                    androidx.compose.material3.Slider(
+                                        value = BackgroundConfig.customBackgroundBlur,
+                                        onValueChange = { BackgroundConfig.setCustomBackgroundBlurValue(it) },
+                                        onValueChangeFinished = { BackgroundConfig.save(context) },
+                                        valueRange = 0f..50f,
+                                        colors = androidx.compose.material3.SliderDefaults.colors(
+                                            thumbColor = MaterialTheme.colorScheme.primary.copy(alpha = 1f),
+                                            activeTrackColor = MaterialTheme.colorScheme.primary.copy(alpha = 1f)
+                                        )
+                                    )
+                                }
+                            )
+                        }
+
                         if (!BackgroundConfig.isDualBackgroundDimEnabled && showCustomDim) {
                             ListItem(
                                 colors = ListItemDefaults.colors(containerColor = Color.Transparent),

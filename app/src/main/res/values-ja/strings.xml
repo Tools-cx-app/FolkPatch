@@ -279,6 +279,7 @@
     <string name="settings_custom_background">カスタム背景</string>
     <string name="settings_custom_background_enabled">カスタム背景が有効です</string>
     <string name="settings_custom_background_opacity">カードの不透明度</string>
+    <string name="settings_custom_background_blur">背景のぼかし</string>
     <string name="settings_custom_background_dim">背景の暗さ</string>
     <string name="settings_select_background_image">背景画像を選択</string>
     <string name="settings_custom_background_summary">カスタム背景画像を設定する</string>

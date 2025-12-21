@@ -326,6 +326,7 @@
     <string name="settings_custom_background">Пользовательский фон</string>
     <string name="settings_custom_background_enabled">Пользовательский фон включен</string>
     <string name="settings_custom_background_opacity">Прозрачность карточки</string>
+    <string name="settings_custom_background_blur">Размытие фона</string>
     <string name="settings_custom_background_dim">Затемнение фона</string>
     <string name="settings_select_background_image">Выбрать фоновое изображение</string>
     <string name="settings_custom_background_summary">Установить пользовательское фоновое изображение</string>

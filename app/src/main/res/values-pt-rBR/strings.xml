@@ -326,6 +326,7 @@
     <string name="settings_custom_background">Fundo Personalizado</string>
     <string name="settings_custom_background_enabled">Fundo Personalizado Ativo</string>
     <string name="settings_custom_background_opacity">Opacidade do cartão</string>
+    <string name="settings_custom_background_blur">Desfoque do fundo</string>
     <string name="settings_custom_background_dim">Escurecimento do fundo</string>
     <string name="settings_custom_background_dual_dim">Escurecimento duplo (dia/noite)</string>
     <string name="settings_custom_background_day_dim">Escurecimento modo dia</string>

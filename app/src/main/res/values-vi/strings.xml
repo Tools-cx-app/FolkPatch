@@ -318,6 +318,7 @@
     <string name="settings_custom_background">Hình nền tùy chỉnh</string>
     <string name="settings_custom_background_enabled">Đã bật hình nền tùy chỉnh</string>
     <string name="settings_custom_background_opacity">Độ mờ của thẻ</string>
+    <string name="settings_custom_background_blur">Làm mờ nền</string>
     <string name="settings_custom_background_dim">Mức tối của nền</string>
     
     <!-- Font Settings -->
