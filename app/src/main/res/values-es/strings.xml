@@ -144,6 +144,14 @@
     <string name="home_selinux_status_permissive">Permissive (Permisivo)</string>
     <string name="home_selinux_status_unknown">Desconocido</string>
 
+    <string name="settings_selinux_mode">Modo SELinux</string>
+    <string name="settings_selinux_mode_summary">Seleccionar modo de cumplimiento de SELinux</string>
+    <string name="settings_selinux_mode_enforcing">Enforcing (Estricto)</string>
+    <string name="settings_selinux_mode_permissive">Permissive (Permisivo)</string>
+    <string name="settings_selinux_current_mode">Actual: %s</string>
+    <string name="settings_selinux_mode_enforcing_summary">SELinux aplica completamente las reglas de acceso</string>
+    <string name="settings_selinux_mode_permissive_summary">SELinux solo registra violaciones, no deniega</string>
+
     <string name="home_device_info">Dispositivo</string>
     <string name="home_system_version">Versión del sistema</string>
     <string name="home_kpatch_version">Versión KernelPatch</string>
@@ -608,6 +616,7 @@
     <string name="home_info_mode_full">Completo (Full)</string>
     <string name="home_info_mode_half">Medio (Half)</string>
     <string name="home_zygisk_implement">Implementación de Zygisk</string>
+    <string name="home_mount_implement">Implementación de Montaje</string>
 
     <string name="settings_list_working_card_hide_mode">Ocultar Tarjeta Half/Full</string>
     <string name="settings_list_working_card_hide_mode_summary">Ocultar la tarjeta pequeña indicando el modo de trabajo</string>

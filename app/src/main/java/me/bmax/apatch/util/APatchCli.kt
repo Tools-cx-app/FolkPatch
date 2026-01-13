@@ -371,6 +371,34 @@ fun setOverlayFSModeEnabled(enable: Boolean) {
         }
 }
 
+/**
+ * Get current SELinux mode
+ * @return "Enforcing" | "Permissive" | "Unknown"
+ */
+fun getSELinuxMode(): String {
+    val shell = getRootShell()
+    val result = ShellUtils.fastCmd(shell, "getenforce")
+    Log.i(TAG, "SELinux mode: $result")
+    return when (result.uppercase()) {
+        "ENFORCING" -> "Enforcing"
+        "PERMISSIVE" -> "Permissive"
+        else -> "Unknown"
+    }
+}
+
+/**
+ * Set SELinux mode
+ * @param enforcing true=Enforcing, false=Permissive
+ * @return whether the operation succeeded
+ */
+fun setSELinuxMode(enforcing: Boolean): Boolean {
+    val shell = getRootShell()
+    val cmd = "setenforce ${if (enforcing) "1" else "0"}"
+    val result = shell.newJob().add(cmd).exec()
+    Log.i(TAG, "Set SELinux to ${if (enforcing) "Enforcing" else "Permissive"}: ${result.isSuccess}")
+    return result.isSuccess
+}
+
 fun getFileNameFromUri(context: Context, uri: Uri): String? {
     var fileName: String? = null
     val contentResolver: ContentResolver = context.contentResolver
@@ -508,5 +536,36 @@ fun getZygiskImplement(): String {
     }
 
     Log.i(TAG, "Zygisk implement: None")
+    return "None"
+}
+
+fun getMetaModuleImplement(): String {
+    try {
+        val shell = getRootShell()
+        if (!ShellUtils.fastCmdResult(shell, "test -f /data/adb/metamodule/module.prop")) {
+             return "None"
+        }
+        val propContent = shell.newJob().add("cat /data/adb/metamodule/module.prop").to(ArrayList(), null).exec().out
+        if (propContent.isEmpty()) return "None"
+        
+        val prop = java.util.Properties()
+        val propString = propContent.joinToString("\n")
+        prop.load(java.io.StringReader(propString))
+        
+        return prop.getProperty("name") ?: "Unknown"
+    } catch (e: Exception) {
+        Log.e(TAG, "getMetaModuleImplement failed", e)
+        return "None"
+    }
+}
+
+fun getMountImplement(): String {
+    if (isMagicMountEnabled()) {
+        return "Folk Mount API"
+    }
+    val metaModule = getMetaModuleImplement()
+    if (metaModule != "None") {
+        return metaModule
+    }
     return "None"
 }

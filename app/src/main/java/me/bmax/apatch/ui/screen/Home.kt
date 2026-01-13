@@ -60,6 +60,7 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Layers
 import androidx.compose.material.icons.outlined.PhoneAndroid
 import androidx.compose.material.icons.outlined.Shield
+import androidx.compose.material.icons.outlined.SdStorage
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BasicAlertDialog
@@ -1137,10 +1138,12 @@ fun InfoCard(kpState: APApplication.State, apState: APApplication.State) {
     val hideFingerprint = remember { mutableStateOf(APApplication.sharedPreferences.getBoolean("hide_fingerprint", false)) }
 
     var zygiskImplement by remember { mutableStateOf("None") }
+    var mountImplement by remember { mutableStateOf("None") }
     LaunchedEffect(Unit) {
         withContext(kotlinx.coroutines.Dispatchers.IO) {
             try {
                 zygiskImplement = me.bmax.apatch.util.getZygiskImplement()
+                mountImplement = me.bmax.apatch.util.getMountImplement()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -1214,6 +1217,12 @@ fun InfoCard(kpState: APApplication.State, apState: APApplication.State) {
                 Spacer(Modifier.height(16.dp))
             }
 
+            if (kpState != APApplication.State.UNKNOWN_STATE && mountImplement != "None") {
+                InfoCardItem(stringResource(R.string.home_mount_implement), mountImplement)
+
+                Spacer(Modifier.height(16.dp))
+            }
+
             InfoCardItem(stringResource(R.string.home_selinux_status), getSELinuxStatus())
 
         }
@@ -1227,10 +1236,12 @@ fun SignInfoCard(kpState: APApplication.State, apState: APApplication.State) {
     val hideFingerprint = remember { mutableStateOf(APApplication.sharedPreferences.getBoolean("hide_fingerprint", false)) }
 
     var zygiskImplement by remember { mutableStateOf("None") }
+    var mountImplement by remember { mutableStateOf("None") }
     LaunchedEffect(Unit) {
         withContext(kotlinx.coroutines.Dispatchers.IO) {
             try {
                 zygiskImplement = me.bmax.apatch.util.getZygiskImplement()
+                mountImplement = me.bmax.apatch.util.getMountImplement()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -1321,6 +1332,11 @@ fun SignInfoCard(kpState: APApplication.State, apState: APApplication.State) {
 
             if (kpState != APApplication.State.UNKNOWN_STATE && zygiskImplement != "None") {
                 InfoCardItem(Icons.Outlined.Layers, stringResource(R.string.home_zygisk_implement), zygiskImplement)
+                Spacer(Modifier.height(16.dp))
+            }
+
+            if (kpState != APApplication.State.UNKNOWN_STATE && mountImplement != "None") {
+                InfoCardItem(Icons.Outlined.SdStorage, stringResource(R.string.home_mount_implement), mountImplement)
                 Spacer(Modifier.height(16.dp))
             }
 

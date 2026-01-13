@@ -120,6 +120,14 @@
     <string name="home_selinux_status_permissive">Chế độ khoan dung</string>
     <string name="home_selinux_status_unknown">Không xác định</string>
 
+    <string name="settings_selinux_mode">Chế độ SELinux</string>
+    <string name="settings_selinux_mode_summary">Chọn chế độ thực thi SELinux</string>
+    <string name="settings_selinux_mode_enforcing">Thực thi (Nghiêm ngặt)</string>
+    <string name="settings_selinux_mode_permissive">Khoan dung (Nới lỏng)</string>
+    <string name="settings_selinux_current_mode">Hiện tại: %s</string>
+    <string name="settings_selinux_mode_enforcing_summary">SELinux thực thi đầy đủ các quy tắc truy cập</string>
+    <string name="settings_selinux_mode_permissive_summary">SELinux chỉ ghi lại vi phạm, không từ chối</string>
+
     <string name="home_device_info">Thiết bị</string>
     <string name="home_system_version">Phiên bản hệ thống</string>
     <string name="home_kpatch_version">Phiên bản bản vá nhân</string>
@@ -610,6 +618,7 @@
     <string name="home_info_mode_full">Đầy đủ</string>
     <string name="home_info_mode_half">Một phần</string>
     <string name="home_zygisk_implement">Triển khai Zygisk</string>
+    <string name="home_mount_implement">Triển khai gắn kết</string>
 
     <string name="settings_app_list_loading_scheme">Sơ đồ tải danh sách ứng dụng</string>
     <string name="settings_app_list_loading_scheme_summary">Chọn cách tải danh sách ứng dụng</string>

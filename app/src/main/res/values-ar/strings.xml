@@ -145,6 +145,14 @@
     <string name="home_selinux_status_permissive">متساهل</string>
     <string name="home_selinux_status_unknown">غير معروف</string>
 
+    <string name="settings_selinux_mode">وضع SELinux</string>
+    <string name="settings_selinux_mode_summary">اختر وضع إنفاذ SELinux</string>
+    <string name="settings_selinux_mode_enforcing">مفروض (صارم)</string>
+    <string name="settings_selinux_mode_permissive">متساهل (مرن)</string>
+    <string name="settings_selinux_current_mode">الحالي: %s</string>
+    <string name="settings_selinux_mode_enforcing_summary">SELinux يفرض قواعد الوصول بالكامل</string>
+    <string name="settings_selinux_mode_permissive_summary">SELinux يسجل الانتهاكات فقط، لا يرفض</string>
+
     <string name="home_device_info">الجهاز</string>
     <string name="home_system_version">إصدار النظام</string>
     <string name="home_kpatch_version">إصدار KernelPatch</string>
@@ -618,6 +626,7 @@
     <string name="home_info_mode_full">كامل</string>
     <string name="home_info_mode_half">نصف</string>
     <string name="home_zygisk_implement">تنفيذ Zygisk</string>
+    <string name="home_mount_implement">تنفيذ التثبيت</string>
 
     <string name="settings_list_working_card_hide_mode">إخفاء بطاقة نصف/كامل</string>
     <string name="settings_list_working_card_hide_mode_summary">إخفاء البطاقة الصغيرة التي تشير إلى وضع العمل</string>

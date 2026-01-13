@@ -36,6 +36,7 @@ import me.bmax.apatch.ui.theme.BackgroundConfig
 import me.bmax.apatch.util.HardwareMonitor
 import me.bmax.apatch.util.Version
 import me.bmax.apatch.util.Version.getManagerVersion
+import me.bmax.apatch.util.getSELinuxStatus
 import me.bmax.apatch.util.rootShellForResult
 
 private val managerVersion = getManagerVersion()
@@ -59,11 +60,13 @@ fun HomeScreenV3(
     val defaultSlot = stringResource(R.string.home_info_auth_na)
     var deviceSlot by remember { mutableStateOf(defaultSlot) }
     var zygiskImplement by remember { mutableStateOf("None") }
+    var mountImplement by remember { mutableStateOf("None") }
 
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
             try {
                 zygiskImplement = me.bmax.apatch.util.getZygiskImplement()
+                mountImplement = me.bmax.apatch.util.getMountImplement()
 
                 val result = rootShellForResult("getprop ro.boot.slot_suffix")
                 if (result.isSuccess) {
@@ -125,6 +128,12 @@ fun HomeScreenV3(
                     value = zygiskImplement
                 )
             }
+            if (kpState != APApplication.State.UNKNOWN_STATE && mountImplement != "None") {
+                InfoRow(
+                    label = stringResource(R.string.home_mount_implement),
+                    value = mountImplement
+                )
+            }
             InfoRow(
                 label = stringResource(R.string.home_info_kernel),
                 value = System.getProperty("os.version") ?: stringResource(R.string.home_selinux_status_unknown)
@@ -168,6 +177,10 @@ fun HomeScreenV3(
             InfoRow(
                 label = stringResource(R.string.home_info_running_mode),
                 value = if (apState == APApplication.State.ANDROIDPATCH_INSTALLED) stringResource(R.string.home_info_mode_full) else if (kpState == APApplication.State.KERNELPATCH_INSTALLED || kpState == APApplication.State.KERNELPATCH_NEED_UPDATE) stringResource(R.string.home_info_mode_half) else stringResource(R.string.home_info_auth_na)
+            )
+            InfoRow(
+                label = stringResource(R.string.home_selinux_status),
+                value = getSELinuxStatus()
             )
             InfoRow(
                 label = stringResource(R.string.home_su_path),

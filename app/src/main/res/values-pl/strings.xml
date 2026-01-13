@@ -125,6 +125,14 @@
     <string name="home_selinux_status_permissive">Pobłażliwy</string>
     <string name="home_selinux_status_unknown">Nieznany</string>
 
+    <string name="settings_selinux_mode">Tryb SELinux</string>
+    <string name="settings_selinux_mode_summary">Wybierz tryb wymuszania SELinux</string>
+    <string name="settings_selinux_mode_enforcing">Egzekwowany (Ścisły)</string>
+    <string name="settings_selinux_mode_permissive">Pobłażliwy (Łagodny)</string>
+    <string name="settings_selinux_current_mode">Obecny: %s</string>
+    <string name="settings_selinux_mode_enforcing_summary">SELinux całkowicie egzekwuje zasady dostępu</string>
+    <string name="settings_selinux_mode_permissive_summary">SELinux tylko rejestruje naruszenia, nie blokuje</string>
+
     <string name="home_device_info">Urządzenie</string>
     <string name="home_system_version">Wersja systemu</string>
     <string name="home_kpatch_version">Wersja KernelPatch</string>
@@ -614,6 +622,7 @@
     <string name="home_info_mode_full">Pełny</string>
     <string name="home_info_mode_half">Częściowy</string>
     <string name="home_zygisk_implement">Implementacja Zygisk</string>
+    <string name="home_mount_implement">Implementacja montowania</string>
 
     <string name="settings_app_list_loading_scheme">Schemat wczytywania listy aplikacji</string>
     <string name="settings_app_list_loading_scheme_summary">Wybierz sposób wczytywania listy aplikacji</string>

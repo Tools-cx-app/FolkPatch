@@ -143,6 +143,14 @@
     <string name="home_selinux_status_permissive">Permissive</string>
     <string name="home_selinux_status_unknown">Unknown</string>
 
+    <string name="settings_selinux_mode">SELinux Mode</string>
+    <string name="settings_selinux_mode_summary">Select SELinux enforcement mode</string>
+    <string name="settings_selinux_mode_enforcing">Enforcing (Strict)</string>
+    <string name="settings_selinux_mode_permissive">Permissive (Lenient)</string>
+    <string name="settings_selinux_current_mode">Current: %s</string>
+    <string name="settings_selinux_mode_enforcing_summary">SELinux fully enforces access rules</string>
+    <string name="settings_selinux_mode_permissive_summary">SELinux only logs violations, does not deny</string>
+
     <string name="home_device_info">Device</string>
     <string name="home_system_version">System version</string>
     <string name="home_kpatch_version">KernelPatch version</string>
@@ -620,6 +628,7 @@
     <string name="home_info_mode_full">Full</string>
     <string name="home_info_mode_half">Half</string>
     <string name="home_zygisk_implement">Zygisk Implement</string>
+    <string name="home_mount_implement">Mount Implementation</string>
 
     <string name="settings_list_working_card_hide_mode">Hide Half/Full Card</string>
     <string name="settings_list_working_card_hide_mode_summary">Hide the small card indicating working mode</string>

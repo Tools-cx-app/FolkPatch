@@ -126,6 +126,14 @@
     <string name="home_selinux_status_permissive">Разрешающий</string>
     <string name="home_selinux_status_unknown">Неизвестно</string>
 
+    <string name="settings_selinux_mode">Режим SELinux</string>
+    <string name="settings_selinux_mode_summary">Выбрать режим принудительного применения SELinux</string>
+    <string name="settings_selinux_mode_enforcing">Принудительный (Строгий)</string>
+    <string name="settings_selinux_mode_permissive">Разрешающий (Мягкий)</string>
+    <string name="settings_selinux_current_mode">Текущий: %s</string>
+    <string name="settings_selinux_mode_enforcing_summary">SELinux полностью применяет правила доступа</string>
+    <string name="settings_selinux_mode_permissive_summary">SELinux только регистрирует нарушения, не блокирует</string>
+
     <string name="home_device_info">Устройство</string>
     <string name="home_system_version">Версия системы</string>
     <string name="home_kpatch_version">Версия KernelPatch</string>
@@ -611,6 +619,7 @@
     <string name="home_info_mode_full">Полный</string>
     <string name="home_info_mode_half">Частичный</string>
     <string name="home_zygisk_implement">Реализация Zygisk</string>
+    <string name="home_mount_implement">Реализация монтирования</string>
 
     <string name="settings_app_list_loading_scheme">Схема загрузки списка приложений</string>
     <string name="settings_app_list_loading_scheme_summary">Выберите способ загрузки списка приложений</string>

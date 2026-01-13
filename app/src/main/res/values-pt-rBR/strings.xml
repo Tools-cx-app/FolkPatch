@@ -144,6 +144,14 @@
     <string name="home_selinux_status_permissive">Permissive (Permissivo)</string>
     <string name="home_selinux_status_unknown">Desconhecido</string>
 
+    <string name="settings_selinux_mode">Modo SELinux</string>
+    <string name="settings_selinux_mode_summary">Selecionar modo de imposição do SELinux</string>
+    <string name="settings_selinux_mode_enforcing">Enforcing (Restrito)</string>
+    <string name="settings_selinux_mode_permissive">Permissive (Permissivo)</string>
+    <string name="settings_selinux_current_mode">Atual: %s</string>
+    <string name="settings_selinux_mode_enforcing_summary">SELinux aplica totalmente as regras de acesso</string>
+    <string name="settings_selinux_mode_permissive_summary">SELinux apenas registra violações, não bloqueia</string>
+
     <string name="home_device_info">Dispositivo</string>
     <string name="home_system_version">Versão do sistema</string>
     <string name="home_kpatch_version">Versão KernelPatch</string>
@@ -608,6 +616,7 @@
     <string name="home_info_mode_full">Completo</string>
     <string name="home_info_mode_half">Metade (Half)</string>
     <string name="home_zygisk_implement">Implementação Zygisk</string>
+    <string name="home_mount_implement">Implementação de Montagem</string>
 
     <string name="settings_list_working_card_hide_mode">Ocultar Cartão Metade/Completo</string>
     <string name="settings_list_working_card_hide_mode_summary">Ocultar o pequeno cartão indicando o modo de funcionamento</string>

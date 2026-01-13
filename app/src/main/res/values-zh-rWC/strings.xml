@@ -118,6 +118,14 @@
     <string name="home_selinux_status_permissive">仙禁宽宥之境</string>
     <string name="home_selinux_status_unknown">仙禁未辨</string>
 
+    <string name="settings_selinux_mode">禁守令式</string>
+    <string name="settings_selinux_mode_summary">择选禁守令之模式</string>
+    <string name="settings_selinux_mode_enforcing">闭关 (森严)</string>
+    <string name="settings_selinux_mode_permissive">宽宥 (宽松)</string>
+    <string name="settings_selinux_current_mode">当下: %s</string>
+    <string name="settings_selinux_mode_enforcing_summary">禁守令严苛执行，绝无通融</string>
+    <string name="settings_selinux_mode_permissive_summary">禁守令仅记录违规，不予惩戒</string>
+
     <string name="home_device_info">仙器</string>
     <string name="home_system_version">天道篇次</string>
     <string name="home_kpatch_version">道核符箓篇次</string>
@@ -603,7 +611,8 @@
     <string name="home_info_mode_full">圆满</string>
     <string name="home_info_mode_half">残缺</string>
     <string name="home_zygisk_implement">Zygisk 仙人指路</string>
-    
+    <string name="home_mount_implement">符箓悬挂</string>
+
     <!-- Install Mode Select -->
     <string name="kp_install_methods">仙道符箓修补/安装</string>
     <string name="restore_boot_methods">选择一仙法镜像恢复至仙籍分区</string>

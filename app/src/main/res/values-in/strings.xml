@@ -126,6 +126,14 @@
     <string name="home_selinux_status_permissive">Diizinkan</string>
     <string name="home_selinux_status_unknown">Tidak diketahui</string>
 
+    <string name="settings_selinux_mode">Mode SELinux</string>
+    <string name="settings_selinux_mode_summary">Pilih mode penegakan SELinux</string>
+    <string name="settings_selinux_mode_enforcing">Diterapkan (Ketat)</string>
+    <string name="settings_selinux_mode_permissive">Diizinkan (Longgar)</string>
+    <string name="settings_selinux_current_mode">Saat ini: %s</string>
+    <string name="settings_selinux_mode_enforcing_summary">SELinux sepenuhnya menerapkan aturan akses</string>
+    <string name="settings_selinux_mode_permissive_summary">SELinux hanya mencatat pelanggaran, tidak menolak</string>
+
     <string name="home_device_info">Perangkat</string>
     <string name="home_system_version">Versi Sistem</string>
     <string name="home_kpatch_version">Versi KernelPatch</string>
@@ -594,6 +602,7 @@
     <string name="home_info_mode_full">Penuh</string>
     <string name="home_info_mode_half">Setengah</string>
     <string name="home_zygisk_implement">Implementasi Zygisk</string>
+    <string name="home_mount_implement">Implementasi pemasangan</string>
 
     <string name="settings_app_list_loading_scheme">Skema Pemuatan Daftar Aplikasi</string>
     <string name="settings_app_list_loading_scheme_summary">Pilih cara memuat daftar aplikasi</string>

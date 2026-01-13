@@ -135,6 +135,14 @@
     <string name="home_selinux_status_permissive">宽容模式</string>
     <string name="home_selinux_status_unknown">未知</string>
 
+    <string name="settings_selinux_mode">SELinux 模式</string>
+    <string name="settings_selinux_mode_summary">选择 SELinux 强制执行模式</string>
+    <string name="settings_selinux_mode_enforcing">强制执行 (严格)</string>
+    <string name="settings_selinux_mode_permissive">宽容模式 (宽松)</string>
+    <string name="settings_selinux_current_mode">当前: %s</string>
+    <string name="settings_selinux_mode_enforcing_summary">SELinux 完全强制执行访问规则</string>
+    <string name="settings_selinux_mode_permissive_summary">SELinux 仅记录违规操作,不会拒绝</string>
+
     <string name="home_device_info">设备</string>
     <string name="home_system_version">系统版本</string>
     <string name="home_kpatch_version">内核补丁版本</string>
@@ -614,6 +622,7 @@
     <string name="home_info_mode_full">完整</string>
     <string name="home_info_mode_half">不完全</string>
     <string name="home_zygisk_implement">Zygisk 实现</string>
+    <string name="home_mount_implement">挂载实现</string>
 
     <string name="settings_list_working_card_hide_mode">隐藏 Half/Full 小卡片</string>
     <string name="settings_list_working_card_hide_mode_summary">隐藏显示工作模式的小卡片</string>

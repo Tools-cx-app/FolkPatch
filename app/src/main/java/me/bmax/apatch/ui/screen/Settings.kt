@@ -153,6 +153,8 @@ import me.bmax.apatch.util.rootShellForResult
 import me.bmax.apatch.util.setGlobalNamespaceEnabled
 import me.bmax.apatch.util.setMagicMountEnabled
 import me.bmax.apatch.util.setOverlayFSModeEnabled
+import me.bmax.apatch.util.getSELinuxMode
+import me.bmax.apatch.util.setSELinuxMode
 import me.bmax.apatch.util.ui.APDialogBlurBehindUtils
 import me.bmax.apatch.util.ui.LocalSnackbarHost
 import me.bmax.apatch.util.ui.NavigationBarsSpacer
@@ -170,6 +172,7 @@ import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.TouchApp
 import androidx.compose.material.icons.filled.Security
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Extension
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material.icons.filled.Dashboard
@@ -204,6 +207,9 @@ fun SettingScreen(navigator: DestinationsNavigator) {
     var isOverlayFSModeEnabled by rememberSaveable {
         mutableStateOf(false)
     }
+    var currentSELinuxMode by rememberSaveable {
+        mutableStateOf("Unknown")
+    }
     var autoBackupBoot by rememberSaveable {
         mutableStateOf<Boolean>(APApplication.sharedPreferences.getBoolean("auto_backup_boot", true))
     }
@@ -216,6 +222,7 @@ fun SettingScreen(navigator: DestinationsNavigator) {
         isGlobalNamespaceEnabled = isGlobalNamespaceEnabled()
         isMagicMountEnabled = isMagicMountEnabled()
         isOverlayFSModeEnabled = isOverlayFSModeEnabled()
+        currentSELinuxMode = getSELinuxMode()
     }
 
     val snackBarHost = LocalSnackbarHost.current
@@ -254,6 +261,15 @@ fun SettingScreen(navigator: DestinationsNavigator) {
         val showResetSuPathDialog = remember { mutableStateOf(false) }
         if (showResetSuPathDialog.value) {
             ResetSUPathDialog(showResetSuPathDialog)
+        }
+
+        val showSELinuxModeDialog = remember { mutableStateOf(false) }
+        if (showSELinuxModeDialog.value) {
+            SELinuxModeDialog(
+                showDialog = showSELinuxModeDialog,
+                currentMode = currentSELinuxMode,
+                onModeChanged = { newMode -> currentSELinuxMode = newMode }
+            )
         }
 
         val showThemeChooseDialog = remember { mutableStateOf(false) }
@@ -569,6 +585,15 @@ fun SettingScreen(navigator: DestinationsNavigator) {
             val overlayFSModeSummary = stringResource(id = R.string.settings_overlayfs_mode_summary)
             val showOverlayFSMode = (kPatchReady && aPatchReady && isMagicMountEnabled) && (matchGeneral || shouldShow(overlayFSModeTitle, overlayFSModeSummary))
 
+            val selinuxModeTitle = stringResource(id = R.string.settings_selinux_mode)
+            val selinuxModeSummary = stringResource(id = R.string.settings_selinux_mode_summary)
+            val selinuxModeValue = when (currentSELinuxMode) {
+                "Enforcing" -> stringResource(R.string.settings_selinux_mode_enforcing)
+                "Permissive" -> stringResource(R.string.settings_selinux_mode_permissive)
+                else -> stringResource(R.string.home_selinux_status_unknown)
+            }
+            val showSELinuxMode = (kPatchReady && aPatchReady) && (matchGeneral || shouldShow(selinuxModeTitle, selinuxModeValue))
+
             val autoBackupBootTitle = stringResource(id = R.string.setting_auto_backup_boot)
             val autoBackupBootSummary = stringResource(id = R.string.setting_auto_backup_boot_summary)
             val showAutoBackupBoot = matchGeneral || shouldShow(autoBackupBootTitle, autoBackupBootSummary)
@@ -607,7 +632,7 @@ fun SettingScreen(navigator: DestinationsNavigator) {
             val currentSchemeLabel = if (currentScheme == "root_service") stringResource(R.string.app_list_loading_scheme_root_service) else stringResource(R.string.app_list_loading_scheme_package_manager)
             val showAppListLoadingScheme = matchGeneral || shouldShow(appListLoadingSchemeTitle, currentSchemeLabel)
 
-            val showGeneralCategory = showLanguage || showUpdate || showAutoUpdate || showGlobalNamespace || showMagicMount || showOverlayFSMode || showAutoBackupBoot || showResetSuPath || showAppTitle || showLauncherIcon || showDesktopAppName || showDpi || showLog || showFolkXEngine || showAppListLoadingScheme
+            val showGeneralCategory = showLanguage || showUpdate || showAutoUpdate || showGlobalNamespace || showMagicMount || showOverlayFSMode || showAutoBackupBoot || showResetSuPath || showAppTitle || showLauncherIcon || showDesktopAppName || showDpi || showLog || showFolkXEngine || showAppListLoadingScheme || showSELinuxMode
 
             if (showGeneralCategory) {
                 SettingsCategory(icon = Icons.Filled.Tune, title = generalTitle, isSearching = searchText.isNotEmpty()) {
@@ -733,6 +758,23 @@ fun SettingScreen(navigator: DestinationsNavigator) {
                                 )
                             },
                             leadingContent = { Icon(Icons.Filled.FilterList, null) }
+                        )
+                    }
+
+                    // SELinux Mode
+                    if (showSELinuxMode) {
+                        ListItem(
+                            colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                            headlineContent = { Text(selinuxModeTitle) },
+                            supportingContent = {
+                                Text(
+                                    text = stringResource(R.string.settings_selinux_current_mode, selinuxModeValue),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.outline
+                                )
+                            },
+                            leadingContent = { Icon(Icons.Filled.Lock, null) },
+                            modifier = Modifier.clickable { showSELinuxModeDialog.value = true }
                         )
                     }
 
@@ -3260,6 +3302,114 @@ fun IconChooseDialog(showDialog: MutableState<Boolean>) {
                 }
             }
 
+            val dialogWindowProvider = LocalView.current.parent as DialogWindowProvider
+            APDialogBlurBehindUtils.setupWindowBlurListener(dialogWindowProvider.window)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SELinuxModeDialog(
+    showDialog: MutableState<Boolean>,
+    currentMode: String,
+    onModeChanged: (String) -> Unit
+) {
+    val context = LocalContext.current
+    var selectedMode by remember { mutableStateOf(currentMode) }
+
+    BasicAlertDialog(
+        onDismissRequest = { showDialog.value = false },
+        properties = DialogProperties(
+            decorFitsSystemWindows = true,
+            usePlatformDefaultWidth = false,
+        )
+    ) {
+        Surface(
+            modifier = Modifier
+                .width(310.dp)
+                .wrapContentHeight(),
+            shape = RoundedCornerShape(30.dp),
+            tonalElevation = AlertDialogDefaults.TonalElevation,
+            color = AlertDialogDefaults.containerColor,
+        ) {
+            Column(modifier = Modifier.padding(24.dp)) {
+                Text(
+                    text = stringResource(R.string.settings_selinux_mode),
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = AlertDialogDefaults.containerColor,
+                    tonalElevation = 2.dp
+                ) {
+                    Column {
+                        // Enforcing Mode
+                        ListItem(
+                            headlineContent = { Text(stringResource(R.string.settings_selinux_mode_enforcing)) },
+                            supportingContent = {
+                                Text(
+                                    text = stringResource(R.string.settings_selinux_mode_enforcing_summary),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.outline
+                                )
+                            },
+                            leadingContent = {
+                                RadioButton(
+                                    selected = selectedMode == "Enforcing",
+                                    onClick = { selectedMode = "Enforcing" }
+                                )
+                            },
+                            modifier = Modifier.clickable { selectedMode = "Enforcing" }
+                        )
+
+                        // Permissive Mode
+                        ListItem(
+                            headlineContent = { Text(stringResource(R.string.settings_selinux_mode_permissive)) },
+                            supportingContent = {
+                                Text(
+                                    text = stringResource(R.string.settings_selinux_mode_permissive_summary),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.outline
+                                )
+                            },
+                            leadingContent = {
+                                RadioButton(
+                                    selected = selectedMode == "Permissive",
+                                    onClick = { selectedMode = "Permissive" }
+                                )
+                            },
+                            modifier = Modifier.clickable { selectedMode = "Permissive" }
+                        )
+                    }
+                }
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 24.dp),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    TextButton(onClick = { showDialog.value = false }) {
+                        Text(stringResource(id = android.R.string.cancel))
+                    }
+
+                    Button(
+                        onClick = {
+                            val success = setSELinuxMode(selectedMode == "Enforcing")
+                            if (success) {
+                                onModeChanged(selectedMode)
+                            }
+                            showDialog.value = false
+                        },
+                        enabled = selectedMode != currentMode
+                    ) {
+                        Text(stringResource(id = android.R.string.ok))
+                    }
+                }
+            }
             val dialogWindowProvider = LocalView.current.parent as DialogWindowProvider
             APDialogBlurBehindUtils.setupWindowBlurListener(dialogWindowProvider.window)
         }

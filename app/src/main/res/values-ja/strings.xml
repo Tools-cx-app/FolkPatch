@@ -105,6 +105,15 @@
     <string name="home_selinux_status_enforcing">Enforcing</string>
     <string name="home_selinux_status_permissive">Permissive</string>
     <string name="home_selinux_status_unknown">Unknown</string>
+
+    <string name="settings_selinux_mode">SELinux モード</string>
+    <string name="settings_selinux_mode_summary">SELinux 強制モードを選択</string>
+    <string name="settings_selinux_mode_enforcing">強制 (厳格)</string>
+    <string name="settings_selinux_mode_permissive">許容 (寛鬆)</string>
+    <string name="settings_selinux_current_mode">現在: %s</string>
+    <string name="settings_selinux_mode_enforcing_summary">SELinux がアクセスルールを完全に強制します</string>
+    <string name="settings_selinux_mode_permissive_summary">SELinux は違反のみを記録し、拒否しません</string>
+
     <string name="home_device_info">デバイス</string>
     <string name="home_system_version">システムのバージョン</string>
     <string name="home_kpatch_version">KernelPatch バージョン</string>
@@ -568,7 +577,8 @@
     <string name="home_info_mode_full">完全</string>
     <string name="home_info_mode_half">不完全</string>
     <string name="home_zygisk_implement">Zygisk 実装</string>
-    
+    <string name="home_mount_implement">マウント実装</string>
+
     <!-- Install Mode Select -->
     <string name="kp_install_methods">KernelPatch パッチング/インストール</string>
     <string name="restore_boot_methods">ブートパーティションに復元するブートを選択</string>
