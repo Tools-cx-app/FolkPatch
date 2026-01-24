@@ -91,10 +91,7 @@ object MonetColorsProvider {
         fun Float.toHex(): String {
             return (this * 255).toInt().coerceIn(0, 255).toString(16).padStart(2, '0')
         }
-        return if (alpha == 1f) {
-            "#${red.toHex()}${green.toHex()}${blue.toHex()}"
-        } else {
-            "#${red.toHex()}${green.toHex()}${blue.toHex()}${alpha.toHex()}"
-        }
+        // Force opaque for WebUI
+        return "#${red.toHex()}${green.toHex()}${blue.toHex()}"
     }
 }

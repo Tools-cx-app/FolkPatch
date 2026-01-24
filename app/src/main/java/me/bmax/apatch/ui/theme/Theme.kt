@@ -77,6 +77,7 @@ val refreshTheme = MutableLiveData(false)
 @Composable
 fun APatchTheme(
     isSettingsScreen: Boolean = false,
+    allowCustomBackground: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val context = LocalContext.current
@@ -186,23 +187,22 @@ fun APatchTheme(
         }
     }
     
+    val useCustomBackground = allowCustomBackground && BackgroundConfig.isCustomBackgroundEnabled
     val colorScheme = baseColorScheme.copy(
-        background = if (BackgroundConfig.isCustomBackgroundEnabled) Color.Transparent else baseColorScheme.background,
-        surface = if (BackgroundConfig.isCustomBackgroundEnabled) {
-            // 在自定义背景模式下，为surface添加半透明效果
+        background = if (useCustomBackground) Color.Transparent else baseColorScheme.background,
+        surface = if (useCustomBackground) {
             baseColorScheme.surface.copy(alpha = BackgroundConfig.customBackgroundOpacity)
         } else {
             baseColorScheme.surface
         },
-        // 同样处理primary和secondary颜色，确保KStatusCard也有半透明效果
         primary = baseColorScheme.primary,
         secondary = baseColorScheme.secondary,
-        secondaryContainer = if (BackgroundConfig.isCustomBackgroundEnabled) {
+        secondaryContainer = if (useCustomBackground) {
             baseColorScheme.secondaryContainer.copy(alpha = BackgroundConfig.customBackgroundOpacity)
         } else {
             baseColorScheme.secondaryContainer
         },
-        surfaceContainer = if (BackgroundConfig.isCustomBackgroundEnabled) {
+        surfaceContainer = if (useCustomBackground) {
             baseColorScheme.surfaceContainer.copy(alpha = BackgroundConfig.customBackgroundOpacity)
         } else {
             baseColorScheme.surfaceContainer
@@ -260,5 +260,4 @@ fun APatchThemeWithBackground(
         }
     }
 }
-
 

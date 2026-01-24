@@ -14,7 +14,8 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,10 +23,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
@@ -41,10 +48,11 @@ import me.bmax.apatch.ui.webui.WebViewInterface
 import java.io.File
 
 @SuppressLint("SetJavaScriptEnabled")
-class WebUIActivity : ComponentActivity() {
+class WebUIActivity : AppCompatActivity() {
     private lateinit var webViewInterface: WebViewInterface
     private lateinit var fileChooserLauncher: ActivityResultLauncher<Intent>
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
+    private var isWebViewReady by mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -53,15 +61,49 @@ class WebUIActivity : ComponentActivity() {
             window.isNavigationBarContrastEnforced = false
         }
 
+        val prefs = APApplication.sharedPreferences
+        val nightModeFollowSys = prefs.getBoolean("night_mode_follow_sys", false)
+        val nightModeEnabled = prefs.getBoolean("night_mode_enabled", false)
+
+        val mode = if (nightModeFollowSys) {
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        } else if (nightModeEnabled) {
+            AppCompatDelegate.MODE_NIGHT_YES
+        } else {
+            AppCompatDelegate.MODE_NIGHT_NO
+        }
+        AppCompatDelegate.setDefaultNightMode(mode)
+
         super.onCreate(savedInstanceState)
+        
+        setupActivityInfo()
 
         setContent {
-            APatchTheme {
+            APatchTheme(allowCustomBackground = false) {
+                val backgroundColor = MaterialTheme.colorScheme.background
                 Box(
-                    modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
+                    modifier = Modifier.fillMaxSize().background(backgroundColor),
                     contentAlignment = Alignment.Center
                 ) {
-                    CircularProgressIndicator()
+                    if (isWebViewReady) {
+                        AndroidView(
+                            modifier = Modifier.fillMaxSize().systemBarsPadding(),
+                            factory = { context ->
+                                WebView(context).apply {
+                                    layoutParams = android.view.ViewGroup.LayoutParams(
+                                        android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                                        android.view.ViewGroup.LayoutParams.MATCH_PARENT
+                                    )
+                                    configureWebView(this)
+                                }
+                            },
+                            update = { view ->
+                                view.setBackgroundColor(backgroundColor.toArgb())
+                            }
+                        )
+                    } else {
+                        CircularProgressIndicator()
+                    }
                 }
             }
         }
@@ -70,7 +112,7 @@ class WebUIActivity : ComponentActivity() {
             if (SuperUserViewModel.apps.isEmpty()) {
                 SuperUserViewModel().fetchAppList()
             }
-            setupWebView()
+            isWebViewReady = true
         }
 
         fileChooserLauncher = registerForActivityResult(
@@ -95,8 +137,7 @@ class WebUIActivity : ComponentActivity() {
         }
     }
 
-    private fun setupWebView() {
-        val moduleId = intent.getStringExtra("id")!!
+    private fun setupActivityInfo() {
         val name = intent.getStringExtra("name")!!
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             @Suppress("DEPRECATION")
@@ -105,6 +146,10 @@ class WebUIActivity : ComponentActivity() {
             val taskDescription = ActivityManager.TaskDescription.Builder().setLabel("FolkPatch - $name").build()
             setTaskDescription(taskDescription)
         }
+    }
+
+    private fun configureWebView(webView: WebView) {
+        val moduleId = intent.getStringExtra("id")!!
 
         val prefs = APApplication.sharedPreferences
         WebView.setWebContentsDebuggingEnabled(prefs.getBoolean("enable_web_debugging", false))
@@ -143,17 +188,7 @@ class WebUIActivity : ComponentActivity() {
             }
         }
 
-        val webView = WebView(this).apply {
-            ViewCompat.setOnApplyWindowInsetsListener(this) { view, insets ->
-                val inset = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-                view.updateLayoutParams<MarginLayoutParams> {
-                    leftMargin = inset.left
-                    rightMargin = inset.right
-                    topMargin = inset.top
-                    bottomMargin = inset.bottom
-                }
-                return@setOnApplyWindowInsetsListener insets
-            }
+        webView.apply {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             settings.allowFileAccess = false
@@ -184,7 +219,5 @@ class WebUIActivity : ComponentActivity() {
             }
             loadUrl("https://mui.kernelsu.org/index.html")
         }
-
-        setContentView(webView)
     }
 }
