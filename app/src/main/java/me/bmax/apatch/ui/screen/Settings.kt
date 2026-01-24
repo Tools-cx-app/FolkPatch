@@ -177,15 +177,10 @@ import androidx.compose.material.icons.filled.Update
 import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.TouchApp
-import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Extension
 import androidx.compose.material.icons.filled.VolumeUp
-import androidx.compose.material.icons.filled.Dashboard
 import me.bmax.apatch.util.UpdateChecker
 import me.bmax.apatch.ui.component.UpdateDialog
-import androidx.compose.material.icons.filled.MusicNote
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.icons.filled.ViewList
 import me.bmax.apatch.ui.component.SearchAppBar
 
